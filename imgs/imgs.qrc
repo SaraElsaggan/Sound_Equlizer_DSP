@@ -1,0 +1,14 @@
+<RCC>
+  <qresource prefix="imgs">
+    <file>aoom_out.png</file>
+    <file>app_icon.png</file>
+    <file>move_down.png</file>
+    <file>move_up.png</file>
+    <file>pause.png</file>
+    <file>play.png</file>
+    <file>slow_down.png</file>
+    <file>speed_up.png</file>
+    <file>strt_frm_begin.png</file>
+    <file>zoom_in.png</file>
+  </qresource>
+</RCC>
