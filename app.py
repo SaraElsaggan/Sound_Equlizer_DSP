@@ -1,11 +1,34 @@
-# from pydub import AudioSegment
-# from pydub.playback import play
-from PyQt5.QtCore import QBuffer, QIODevice, QByteArray  # Add these import statements
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-from PyQt5.QtCore import QBuffer, QIODevice 
+from PyQt5.QtCore import QTimer
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
+from matplotlib.figure import Figure
+from pydub.playback import play
+import librosa as librosa
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
+import librosa.display
+from IPython.display import Audio
+import sys, os, shutil
+
+from librosa.core.spectrum import _spectrogram
+import numpy as np
+import pyqtgraph as pg
+from PyQt5 import QtWidgets as qtw
+from PyQt5 import QtCore as qtc
+from PyQt5 import QtGui as qtg
+from datetime import datetime
+import matplotlib.pyplot as plt
+import librosa.display
+from scipy import signal
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from scipy.io import wavfile
+import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
+import pyqtgraph as pg
+from scipy import fftpack
 from scipy.signal import spectrogram
-import winsound
-import pyaudio
 from scipy.io import wavfile
 from scipy.interpolate import interp1d
 from scipy.signal import resample
@@ -20,28 +43,31 @@ from PyQt5.QtGui import QIcon, QKeySequence
 import numpy as np
 from PyQt5.QtWidgets import QFileDialog
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow
-
-import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow , QStackedWidget ,QFrame , QComboBox
 from mainwindow import Ui_MainWindow
 import numpy as np
-from PyQt5 import QtWidgets, QtMultimedia
 from PyQt5.QtWidgets import QInputDialog, QFileDialog
 from scipy.io import wavfile
 import os
 import pyqtgraph as pg
 import numpy as np
-from scipy.fftpack import rfft, rfftfreq, irfft
+from scipy.fftpack import rfft, rfftfreq, irfft , fft , fftfreq
 from random import randint
 from pyqtgraph import PlotWidget, plot, QtCore
-# import simpleaudio as sa
 from PyQt5.QtCore import pyqtSlot
 from cmath import rect
 import sys
 import sounddevice as sd
 from numba import jit
 
+
+class MplCanvas(FigureCanvasQTAgg):
+    
+    def __init__(self, parent=None, width=5, height=1, dpi=100):
+        fig = Figure(figsize=(width, height), dpi=dpi)
+        self.axes = fig.add_subplot(111)
+        super(MplCanvas, self).__init__(fig)
+    
 
 
 class MyWindow(QMainWindow):   
@@ -51,6 +77,7 @@ class MyWindow(QMainWindow):
       
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)  
+        
         # Set the checkbox to be checked by default
         self.ui.chek_bx_show_spect_input.setChecked(True)
         self.ui.chek_bx_show_spect_output.setChecked(True)
@@ -59,9 +86,6 @@ class MyWindow(QMainWindow):
        
         self.ui.stackedWidget.setFrameShape(QFrame.NoFrame)
         self.ui.stackedWidget.setFrameShadow(QFrame.Plain)
-        self.ui.combo_bx_mode.currentIndexChanged.connect(self.handleComboBox)
-        
-        
         
         #----me---
         # self.file_path = None;
@@ -79,9 +103,29 @@ class MyWindow(QMainWindow):
         self.is_loaded = None
         
         self.is_play = False
+
+      
+   
         
-        self.ui.chek_bx_show_spect_input.stateChanged.connect(lambda : self.show_hide_specto_grph( self.ui.chek_bx_show_spect_input.isChecked(), self.ui.spect_input))
-        self.ui.chek_bx_show_spect_output.stateChanged.connect(lambda : self.show_hide_specto_grph( self.ui.chek_bx_show_spect_output.isChecked(), self.ui.spect_output))
+        
+      
+        
+        
+        
+        self.timer_input = QTimer(self)
+        
+        self.ui.chek_bx_show_spect_input.stateChanged.connect(lambda : self.show_hide_specto_grph( self.ui.chek_bx_show_spect_input.isChecked(), self.spectrogram_canvas_input))
+        self.ui.chek_bx_show_spect_output.stateChanged.connect(lambda : self.show_hide_specto_grph( self.ui.chek_bx_show_spect_output.isChecked(), self.spectrogram_canvas_output))
+        
+        self.ui.combo_bx_mode.currentIndexChanged.connect(self.handleComboBox)
+        self.spectrogram_canvas_input = MplCanvas(self)
+        self.spectrogram_canvas_output = MplCanvas(self)
+        
+        
+        self.ui.verticalLayout_7.addWidget(self.spectrogram_canvas_input)
+        self.ui.verticalLayout_8.addWidget(self.spectrogram_canvas_output)
+        
+        
         
         self.ui.btn_zoom_in_input.clicked.connect(lambda: self.zoom(self.ui.grph_input_sig , 1))
         self.ui.btn_zoom_out_input.clicked.connect(lambda: self.zoom(self.ui.grph_input_sig , 0))
@@ -90,7 +134,10 @@ class MyWindow(QMainWindow):
         self.ui.btn_zoom_out_output.clicked.connect(lambda: self.zoom(self.ui.grph_output_sig , 0))
 
         self.ui.actionUpload_file.triggered.connect(self.upload_signal_file)
-        # self.ui.btn_play_pasuse.clicked.connect(lambda: self.play_pause(self.original_sig)) #this is for the input signal
+        self.ui.btn_play_pause_input.clicked.connect(lambda: self.play_audio(self.original_sig)) #this is for the input signal
+
+        
+
         QShortcut(QKeySequence("Ctrl+o"), self).activated.connect(self.upload_signal_file)
         
         ##orignal_sig --------> input signal(loaded)
@@ -107,14 +154,6 @@ class MyWindow(QMainWindow):
         this funcrion is to cala the min and max of graph to set it limits
         '''
 
-        # min_x =  min(self.plot_input.getData()[0])
-        # max_x =  max(self.plot_input.getData()[0])
-
-
-        # min_y =  min(self.plot_input.getData()[1])
-        # max_y =  max(self.plot_input.getData()[1])
-        
-        # return min_x  , max_x , min_y , max_y
         x_min, x_max = self.ui.grph_input_sig.getViewBox().viewRange()[0]
         y_min, y_max = self.ui.grph_input_sig.getViewBox().viewRange()[1]
 
@@ -122,67 +161,75 @@ class MyWindow(QMainWindow):
         
         
     def upload_signal_file(self):
-        '''this function read the sound signal file 
-            plot it in the input graph
-            this code is from the sound equlizer repo
-        '''
+    
         file_path = QFileDialog.getOpenFileName(self, "Open Song", "~", "Sound Files ( *.wav )")
         if file_path[0] == "":
             pass
         else:
             self.sample_rate, self.original_sig = wavfile.read(file_path[0])
-            # if self.original_sig.ndim == 2:
-            #     self.original_sig = np.mean(self.original_sig, axis=1)
-            # else:
-            #     pass
+           
             self.is_loaded = True
-        self.ui.grph_input_sig.clear()
-        self.plot_input = self.ui.grph_input_sig.plot(self.original_sig , pen= "b")
-        self.ui.grph_input_sig.autoRange()
-        self.edit_graphs()
-        self.freq_domain_convert(self.original_sig)
+        # self.ui.grph_input_sig.clear()
+        # self.plot_input = self.ui.grph_input_sig.plot(self.original_sig , pen= "b")
+        # self.ui.grph_input_sig.autoRange()
+        self.plot_audio_signal(self.original_sig , self.sample_rate , self.ui.grph_input_sig)
+        self.fourier(self.original_sig)
+        # # self.edit_graphs()
+        
+    def plot_audio_signal(self , samples , sampling_rate , widget):
+        peak_value = np.amax(samples)
+        normalized_data = samples / peak_value
+        print(f"shape :  {samples.shape}")
+        # time = list(np.linspace(0, length, samples.shape[0]))
+        time = np.array(range(0 , len(samples) )) / sampling_rate
+        print(f"time {len(time)}")
+        drawing_pen = pg.mkPen(color=(255, 0, 0), width=0.5)
+        widget.clear()
+        widget.plot(time, samples, pen=drawing_pen)
+        # widget.plot(time, normalized_data, pen=drawing_pen)
+        
+        # widget.plotItem.getViewBox().setLimits(xMin=0, xMax=np.max(time), yMin=-1.1, yMax=1.1)
+  
+        
+        
+    
+    def fourier(self , signal): 
+        self.fourier_transform = np.fft.fft(self.original_sig)
+        self.magnitude_spectrum = 2 * np.abs(self.fourier_transform / len(self.original_sig))
+        freqs = np.fft.fftfreq(len(self.original_sig), 1 / self.sample_rate)
+        
+        self.ui.signal_view.plot(freqs[:len(freqs)//2] , self.magnitude_spectrum[:len(freqs)//2])
+        self.spectogram(self.original_sig  , self.sample_rate)
+    
 
-        '''just was trying somthing
-        t = np.linspace(0  , 5 , 1000)
-        self.ui.input_signal.clear()
-        self.original_sig = (np.sin(2*t*np.pi* 5 )+3* np.sin(2*t*np.pi* 10 ) + 5* np.sin(t*np.pi* 40 ))
-        self.sample_rate = 1/1000
-        self.ui.input_signal.plot(self.original_sig , pen= "b")
-        '''
-        
-        
-    def freq_domain_convert(self , signal):
-        '''this function takes the input signal and convert it into freq domain and plot it'''
-        '''this code is from chatgpt 
-        # n = len(self.original_sig)
-        # k = np.arange(n)
-        # T = n / self.sample_rate
-        # frq = k / T
-        # frq = frq[range(n // 2)]
-        # fft_vals = np.fft.fft(self.original_sig)
-        # fft_vals = fft_vals[range(n // 2)]
+    
+    def play_audio(self, signal):
+    
+        sd.play(signal , self.sample_rate)
+        '''need edits'''
+        self.vertical_line = pg.InfiniteLine(angle=90, movable=False, pen='r')
+        self.ui.grph_input_sig.addItem(self.vertical_line)
+        self.x_position = 0
+        self.timer_input.timeout.connect(self.update_plot)
+        self.timer_input.start(100)  # Update every 100 milliseconds
 
-        # Plot the frequency-domain signal
-        # self.ui.signal_view.clear()
-        # self.ui.signal_view.plot(frq, abs(fft_vals), pen='r')
-        '''
+
+
+    def update_plot(self):
+        # Update the position of the vertical line
+        self.vertical_line.setValue(self.x_position)
         
-        '''this code is from sound_equlizer repo'''
-        self.original_complex = rfft(signal)
-        self.modified_complex= np.copy(self.original_complex)
-        self.freq = (rfftfreq(len(self.original_complex) + 1, 1 / self.sample_rate))
-        self.freq = self.freq[self.freq > 0]
-        print(self.freq[len(self.freq)-1])
-        self.ui.signal_view.clear()
-        self.ui.signal_view.plot(self.freq, np.abs(self.modified_complex), pen='g')
+        # Update x-axis position for the next iteration
+        self.x_position += 0.1
         
         
-        # self.file_path  , _ = QFileDialog.getOpenFileName( self , "open file", "" ,"(*.wav) ")
-        # sampling_rate, self.original_sig = wavfile.read(self.file_path)
-        # self.input_time = np.arange(len(self.original_sig))
-        # self.ui.original_sig.clear()
-        # self.plt_original_sig = self.ui.original_sig.plot(self.input_time , self.original_sig)
-        # self.edit_graphs( self.ui.original_sig)
+    def spectogram(self  ,signal , sample_rate):
+        self.spectrogram_canvas_input.axes.clear()
+        self.spectrogram_canvas_input.axes.specgram(signal , Fs = sample_rate)
+        self.spectrogram_canvas_input.draw()
+        
+        
+
     
     def show_hide_specto_grph(self  , state  , specto_grph_widget ):
         if state:
@@ -198,35 +245,6 @@ class MyWindow(QMainWindow):
         
           
       
-    # def play_pause(self , signal):
-    #     # if self.playing_audio is not None:
-    #     #     # Stop the currently playing audio
-    #     #     self.playing_audio.stop()
-    #     #     self.playing_audio = None
-    #     icon = QtGui.QPixmap("play.png")
-    #     self.ui.btn_play_pasuse.setToolTip("paly")
-    #     self.ui.btn_play_pasuse.setIcon(QtGui.QIcon(icon))
-
-    #     audio_segment = AudioSegment(
-    #             data=signal.tobytes(),
-    #             sample_width=signal.dtype.itemsize,
-    #             frame_rate=self.sample_rate,
-    #             channels=1 if signal.ndim == 1 else signal.shape[1]
-    #         )   
-
-    #         # Play the audio
-    #     self.playing_audio = play(audio_segment)
-         
-         
-            
-
-
-
- 
- 
-    
-
-  
     
 
 def main():
