@@ -70,7 +70,6 @@ QSlider::groove {
             <property name="font">
              <font>
               <pointsize>-1</pointsize>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -84,7 +83,6 @@ QSlider::groove {
             <property name="font">
              <font>
               <family>Arial</family>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -150,7 +148,6 @@ font-weight: bold;}</string>
                  <widget class="QSlider" name="verticalSlider_15">
                   <property name="font">
                    <font>
-                    <weight>50</weight>
                     <bold>false</bold>
                    </font>
                   </property>
@@ -787,7 +784,7 @@ font-weight: bold;}</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/strt_frm_begin.png</normaloff>../Downloads/imgs/strt_frm_begin.png</iconset>
+              <normaloff>imgs/strt_frm_begin.png</normaloff>imgs/strt_frm_begin.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -804,7 +801,7 @@ font-weight: bold;}</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/slow_down.png</normaloff>../Downloads/imgs/slow_down.png</iconset>
+              <normaloff>imgs/slow_down.png</normaloff>imgs/slow_down.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -821,7 +818,7 @@ font-weight: bold;}</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/aoom_out.png</normaloff>../Downloads/imgs/aoom_out.png</iconset>
+              <normaloff>imgs/aoom_out.png</normaloff>imgs/aoom_out.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -842,7 +839,7 @@ font-weight: bold;}</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/play.png</normaloff>../Downloads/imgs/play.png</iconset>
+              <normaloff>imgs/play.png</normaloff>imgs/play.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -859,7 +856,7 @@ font-weight: bold;}</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/zoom_in.png</normaloff>../Downloads/imgs/zoom_in.png</iconset>
+              <normaloff>imgs/zoom_in.png</normaloff>imgs/zoom_in.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -876,7 +873,7 @@ font-weight: bold;}</string>
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/speed_up.png</normaloff>../Downloads/imgs/speed_up.png</iconset>
+              <normaloff>imgs/speed_up.png</normaloff>imgs/speed_up.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -910,7 +907,6 @@ font-weight: bold;}</string>
           <property name="font">
            <font>
             <pointsize>10</pointsize>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -983,7 +979,7 @@ color: rgb(255, 255, 255);
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/strt_frm_begin.png</normaloff>../Downloads/imgs/strt_frm_begin.png</iconset>
+              <normaloff>imgs/strt_frm_begin.png</normaloff>imgs/strt_frm_begin.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -1000,7 +996,7 @@ color: rgb(255, 255, 255);
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/slow_down.png</normaloff>../Downloads/imgs/slow_down.png</iconset>
+              <normaloff>imgs/slow_down.png</normaloff>imgs/slow_down.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -1017,7 +1013,7 @@ color: rgb(255, 255, 255);
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/aoom_out.png</normaloff>../Downloads/imgs/aoom_out.png</iconset>
+              <normaloff>imgs/aoom_out.png</normaloff>imgs/aoom_out.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -1038,7 +1034,7 @@ color: rgb(255, 255, 255);
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/play.png</normaloff>../Downloads/imgs/play.png</iconset>
+              <normaloff>imgs/play.png</normaloff>imgs/play.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -1055,7 +1051,7 @@ color: rgb(255, 255, 255);
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/zoom_in.png</normaloff>../Downloads/imgs/zoom_in.png</iconset>
+              <normaloff>imgs/zoom_in.png</normaloff>imgs/zoom_in.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -1072,7 +1068,7 @@ color: rgb(255, 255, 255);
             </property>
             <property name="icon">
              <iconset>
-              <normaloff>../Downloads/imgs/speed_up.png</normaloff>../Downloads/imgs/speed_up.png</iconset>
+              <normaloff>imgs/speed_up.png</normaloff>imgs/speed_up.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -1112,7 +1108,6 @@ color: rgb(255, 255, 255);
           <property name="font">
            <font>
             <pointsize>10</pointsize>
-            <weight>75</weight>
             <bold>true</bold>
            </font>
           </property>
@@ -1147,7 +1142,6 @@ color: rgb(255, 255, 255);
        <widget class="QTabWidget" name="windows_tabs">
         <property name="font">
          <font>
-          <weight>75</weight>
           <bold>true</bold>
          </font>
         </property>
@@ -1252,7 +1246,7 @@ QTabWidget::pane {
      <x>0</x>
      <y>0</y>
      <width>1175</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
