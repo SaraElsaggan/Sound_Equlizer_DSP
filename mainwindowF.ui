@@ -907,12 +907,6 @@ font-weight: bold;}</string>
         </item>
         <item>
          <widget class="QCheckBox" name="chek_bx_show_spect_input">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
           <property name="font">
            <font>
             <weight>75</weight>
@@ -1112,29 +1106,13 @@ color: rgb(255, 255, 255);
         <item>
          <widget class="QCheckBox" name="chek_bx_show_spect_output">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true">Qcheckbox{
-border:5px solid
-}
-QCheckBox::indicator:unchecked {
-    ; /* Set the border color for the unchecked state */
-    background-color: rgb(126, 126, 126); /* Set the background color for the unchecked state */
-}
-
-
-QCheckBox::indicator:unchecked:hover {
-    border: 2px solid 
-
-	background-color: rgb(126, 126, 126);
-}
-
-
-</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>Show</string>
