@@ -10,6 +10,7 @@ import sys
 from PyQt5.QtGui import QIcon, QKeySequence
 from mainwindow import Ui_MainWindow
 import numpy as np
+import pandas as pd
 from scipy.io import wavfile
 import pyqtgraph as pg
 from scipy.fftpack import rfft, rfftfreq, irfft , fft , fftfreq
@@ -157,14 +158,32 @@ class MyWindow(QMainWindow):
         
     def upload_signal_file(self):
         
-        file_path = QFileDialog.getOpenFileName(self, "Open Song", "~", "Sound Files ( *.wav )")
-        if file_path[0] == "":
-            pass
-        else:
-            self.sample_rate, self.original_sig = wavfile.read(file_path[0])
-            self.is_loaded = True
+        file_path , _ = QFileDialog.getOpenFileName(self, "Open Song", "~")
         
-        self.plot_audio_signal(self.original_sig , self.sample_rate , self.ui.grph_input_sig)
+            
+        if file_path[-3:]== "csv":
+            self.is_ecg = True
+            print("csvvv")
+            df = pd.read_csv(file_path)
+            t = df.iloc[:, 0].values
+            self.original_sig = df.iloc[:, 1].values
+            self.ui.grph_input_sig.clear()
+            self.ui.grph_input_sig.plot(t , self.original_sig)
+            self.sample_rate = 125
+            self.spectogram(self.original_sig , 125 , self.spectrogram_canvas_input)
+            # self.play_audio(self.original_sig , 1 ,self.ui.horizontalSlider , self.timer_1 )
+            
+        elif file_path[-3:]== "wav":
+            print("wavvv")
+            self.sample_rate, self.original_sig = wavfile.read(file_path)
+            self.is_loaded = True
+            self.plot_audio_signal(self.original_sig , self.sample_rate , self.ui.grph_input_sig)
+
+        else :
+            pass
+
+            
+            
         self.fourier_function()
         
     def plot_audio_signal(self , samples , sampling_rate , widget):
