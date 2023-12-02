@@ -60,9 +60,12 @@ QSlider::groove {
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_6">
           <item>
-           <widget class="QLabel" name="lbl_mode">
-            <property name="enabled">
-             <bool>false</bool>
+           <widget class="QLabel" name="label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
             <property name="font">
              <font>
@@ -72,10 +75,7 @@ QSlider::groove {
              </font>
             </property>
             <property name="text">
-             <string>Select Mode</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <string>Select mode</string>
             </property>
            </widget>
           </item>
@@ -909,6 +909,7 @@ font-weight: bold;}</string>
          <widget class="QCheckBox" name="chek_bx_show_spect_input">
           <property name="font">
            <font>
+            <pointsize>10</pointsize>
             <weight>75</weight>
             <bold>true</bold>
            </font>
@@ -1108,11 +1109,18 @@ color: rgb(255, 255, 255);
           <property name="enabled">
            <bool>true</bool>
           </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <weight>75</weight>
+            <bold>true</bold>
+           </font>
+          </property>
           <property name="cursor">
            <cursorShape>PointingHandCursor</cursorShape>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
            <string>Show</string>
@@ -1152,6 +1160,7 @@ QTabBar {
 
 QTabBar::tab {
     color: white; /* Set the color of the tab text */
+ size: 12px;
     padding: 8px; /* Adjust the padding as needed */
 }
 

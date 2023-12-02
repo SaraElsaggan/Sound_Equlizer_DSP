@@ -165,12 +165,14 @@ class MyWindow(QMainWindow):
             self.is_ecg = True
             print("csvvv")
             df = pd.read_csv(file_path)
+            # t = np.arange(0 , 7 , 1/125)
             t = df.iloc[:, 0].values
             self.original_sig = df.iloc[:, 1].values
             self.ui.grph_input_sig.clear()
             self.ui.grph_input_sig.plot(t , self.original_sig)
             self.sample_rate = 125
             self.spectogram(self.original_sig , 125 , self.spectrogram_canvas_input)
+            self.ui.grph_input_sig.plotItem.vb.setLimits(xMin=0, xMax=7, yMin=0, yMax=100)
             # self.play_audio(self.original_sig , 1 ,self.ui.horizontalSlider , self.timer_1 )
             
         elif file_path[-3:]== "wav":
