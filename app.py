@@ -64,11 +64,11 @@ class MyWindow(QMainWindow):
         self.ui.chek_bx_show_spect_input.stateChanged.connect(lambda : self.show_hide_specto_grph( self.ui.chek_bx_show_spect_input.isChecked(), self.spectrogram_canvas_input))
         self.ui.chek_bx_show_spect_output.stateChanged.connect(lambda : self.show_hide_specto_grph( self.ui.chek_bx_show_spect_output.isChecked(), self.spectrogram_canvas_output))
 
-        self.ui.btn_zoom_in_input.clicked.connect(lambda: self.zoom(self.ui.grph_input_sig , 1))
-        self.ui.btn_zoom_out_input.clicked.connect(lambda: self.zoom(self.ui.grph_input_sig , 0))
+        self.ui.btn_zoom_in_input.clicked.connect(lambda: self.zoom( 1))
+        self.ui.btn_zoom_out_input.clicked.connect(lambda: self.zoom( 0))
 
-        self.ui.btn_zoom_in_output.clicked.connect(lambda: self.zoom(self.ui.grph_output_sig , 1))
-        self.ui.btn_zoom_out_output.clicked.connect(lambda: self.zoom(self.ui.grph_output_sig , 0))
+        self.ui.btn_zoom_in_output.clicked.connect(lambda: self.zoom( 1))
+        self.ui.btn_zoom_out_output.clicked.connect(lambda: self.zoom( 0))
 
         self.ui.actionUpload_file.triggered.connect(self.upload_signal_file)
         
@@ -85,53 +85,61 @@ class MyWindow(QMainWindow):
         
         # self.ui.btn_srt_begin_input.clicked.connect(lambda :self.pause(self.timer_1))
         self.ui.btn_srt_begin_input.clicked.connect(lambda :self.play_audio(self.original_sig , 1 , self.ui.input_slider , self.timer_1))
-        self.ui.btn_srt_begin_output.clicked.connect(lambda :self.play_audio(self.modified_signal , 1 , self.ui.output_slider , self.timer_2))
+        self.ui.btn_srt_begin_output.clicked.connect(lambda :self.play_audio(self.modified_signal , 8 , self.ui.output_slider , self.timer_2))
         
-        self.ui.verticalSlider_23.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["cat"] ,self.ui.verticalSlider_23.value() )) #this is for the input signal
-        self.ui.verticalSlider_28.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["dog"] ,self.ui.verticalSlider_28.value() )) #this is for the input signal
-        self.ui.verticalSlider_30.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["duck"] ,self.ui.verticalSlider_30.value() )) #this is for the input signal
-        # self.ui.verticalSlider_33.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["elephant"] ,self.ui.verticalSlider_33.value() )) #this is for the input signal
-        self.ui.verticalSlider_33.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["cow"] ,self.ui.verticalSlider_33.value() )) #this is for the input signal
+        self.ui.cat_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["cat"] ,self.ui.cat_slider.value() )) 
+        self.ui.dog_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["dog"] ,self.ui.dog_slider.value() )) 
+        self.ui.duck_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["duck"] ,self.ui.duck_slider.value() )) 
+        # self.ui.cow_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["elephant"] ,self.ui.cow_slider.value() )) 
+        self.ui.cow_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["cow"] ,self.ui.cow_slider.value() )) 
 
-        self.ui.verticalSlider_21.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["bass"] ,self.ui.verticalSlider_21.value() )) #this is for the input signal
-        self.ui.verticalSlider_25.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["Voil_c5"] ,self.ui.verticalSlider_25.value() )) #this is for the input signal
-        self.ui.verticalSlider_26.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["p"] ,self.ui.verticalSlider_26.value() )) #this is for the input signal
-        self.ui.verticalSlider_29.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["drum"] ,self.ui.verticalSlider_29.value() )) #this is for the input signal
+        self.ui.bass_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["bass"] ,self.ui.bass_slider.value() )) 
+        self.ui.voil_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["Voil_c5"] ,self.ui.voil_slider.value() )) 
+        self.ui.piano_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["piano"] ,self.ui.piano_slider.value() )) 
+        self.ui.drum_slider.valueChanged.connect(lambda: self.modfy_frq_component(self.freq_ranges["drum"] ,self.ui.drum_slider.value() )) 
 
-        # self.ui.uniform_slider_range_1.valueChanged.connect(self.uniform_ranges) #this is for the input signal
-        self.ui.uniform_slider_range_1.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[0] ,self.ui.uniform_slider_range_1.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_2.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[1] ,self.ui.uniform_slider_range_2.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_3.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[2] ,self.ui.uniform_slider_range_3.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_4.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[3] ,self.ui.uniform_slider_range_4.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_5.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[4] ,self.ui.uniform_slider_range_5.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_6.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[5] ,self.ui.uniform_slider_range_6.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_7.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[6] ,self.ui.uniform_slider_range_7.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_8.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[7] ,self.ui.uniform_slider_range_8.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_9.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[8] ,self.ui.uniform_slider_range_9.value() )) #this is for the input signal
-        self.ui.uniform_slider_range_10.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[9] ,self.ui.uniform_slider_range_10.value() )) #this is for the input signal
+        # self.ui.uniform_slider_range_1.valueChanged.connect(self.uniform_ranges) 
+        self.ui.uniform_slider_range_1.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[0] ,self.ui.uniform_slider_range_1.value() )) 
+        self.ui.uniform_slider_range_2.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[1] ,self.ui.uniform_slider_range_2.value() )) 
+        self.ui.uniform_slider_range_3.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[2] ,self.ui.uniform_slider_range_3.value() )) 
+        self.ui.uniform_slider_range_4.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[3] ,self.ui.uniform_slider_range_4.value() )) 
+        self.ui.uniform_slider_range_5.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[4] ,self.ui.uniform_slider_range_5.value() )) 
+        self.ui.uniform_slider_range_6.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[5] ,self.ui.uniform_slider_range_6.value() )) 
+        self.ui.uniform_slider_range_7.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[6] ,self.ui.uniform_slider_range_7.value() )) 
+        self.ui.uniform_slider_range_8.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[7] ,self.ui.uniform_slider_range_8.value() )) 
+        self.ui.uniform_slider_range_9.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[8] ,self.ui.uniform_slider_range_9.value() )) 
+        self.ui.uniform_slider_range_10.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[9] ,self.ui.uniform_slider_range_10.value() )) 
 
         self.freq_ranges = {
             "cat" : [(2200 , 2400)  , (550 , 600) , (1700 , 1800) , (2800 , 3000)],
-            "dog" : [(220 , 300 ) , (520 , 680) , (800 , 850) , (900,  1000) , (1060 , 110) , (1040 , 1220)],
-            "duck" :[ (800, 2500)],
+            "dog" : [(300 , 1700)],
+            "duck" :[ (450 , 550) , (800 , 840) ,( 880 , 920) , (960,  1000) , (1100 , 2200)], #duck2
             "cow" : [(250, 400)],
-            "elephant" : [(100 , 300) ]  , 
+            
+            # "dog" : [(220 , 300 ) , (520 , 680) , (800 , 850) , (900,  1000) , (1060 , 110) , (1040 , 1220)],
+            # "duck" :[ (800, 2500)], #duck2
+            # "duck" :[ (0, 2500)], #duck2
+            # "elephant" : [(100 , 300) ]  , 
             "bass" : [(0 , 400)] , 
-            "glock" : [(650 , 400) , (690 , 710) , (785 , 790) , (833 , 836),  (936 , 942) , (992 , 996) , (1070 , 1090) , (1315 , 1340) , (1400 , 1415)] , 
-            "voil" : [(485 ,500) , (515 ,530) , (770 , 790) , (980 , 1000),  (1030 , 1065) , (1480 , 1490) , (1560 , 1580) , (1970 , 1985) , (2085 , 2110) , (2460 , 2480) , (2600 , 2630) , (2970 , 2980) , (3130 , 3155) , (3454 , 3477) , (3654 , 3680)] , 
-            "Voil_c5" : [(510 , 540 ) , (1020 , 1060) ,  (1530 , 1590) , (2060 , 2120) , (2570 , 640)],
-            "T" : [(775 , 795 ) , (1560 , 1580) ,  (2345 , 2365) ],
-            "f" : [(1540 , 1610 ) ],
-            "p" : [(260 , 264 ) , (520 , 532) ,  (780 , 790) , (1045 , 1052) , (1574 , 1584) , (1840 , 1850)],
-            # "p" : [(255 , 267 ) , (218 , 532) ,  (780 , 790) , (1045 , 1052) , (1574 , 1584) , (1840 , 1850)],
+            # "glock" : [(650 , 400) , (690 , 710) , (785 , 790) , (833 , 836),  (936 , 942) , (992 , 996) , (1070 , 1090) , (1315 , 1340) , (1400 , 1415)] , 
+            # "voil" : [(485 ,500) , (515 ,530) , (770 , 790) , (980 , 1000),  (1030 , 1065) , (1480 , 1490) , (1560 , 1580) , (1970 , 1985) , (2085 , 2110) , (2460 , 2480) , (2600 , 2630) , (2970 , 2980) , (3130 , 3155) , (3454 , 3477) , (3654 , 3680)] , 
+            "Voil_c5" : [(510 , 540 ) , (1020 , 1060) ,  (1530 , 1590) , (2060 , 2120) , (2570 , 2640)],
+            # "T" : [(775 , 795 ) , (1560 , 1580) ,  (2345 , 2365) ],
+            # "f" : [(1540 , 1610 ) ],
+            "piano" : [(260 , 264 ) , (520 , 532) ,  (780 , 790) , (1045 , 1052) , (1574 , 1584) , (1840 , 1850)],
+            # # "p" : [(255 , 267 ) , (218 , 532) ,  (780 , 790) , (1045 , 1052) , (1574 , 1584) , (1840 , 1850)],
             "drum" : [(0 , 250)],
-            # "uniform":[(0 , 2000) , (2000 , 4000) , (4000 , 6000) , (6000 , 8000) , (8000 , 10000) (10000 , 12000), (12000 , 14000) , (14000 , 16000) , (16000 , 18000) , (18000, 20000)]
+            # # "uniform":[(0 , 2000) , (2000 , 4000) , (4000 , 6000) , (6000 , 8000) , (8000 , 10000) (10000 , 12000), (12000 , 14000) , (14000 , 16000) , (16000 , 18000) , (18000, 20000)]
+
+            # "cat" : [(500 , 600)  , (100 , 1200) , (1600 , 1800) , (2200 , 2400) ], #cat_121
+            # # "cat" : [(540 , 570)  , (590 , 605) , (1040 , 1140) , (1640 , 1700) , (1780, 1800) , (2200 , 2260), (1160,  1200)], #cat_121
+            # "dog" : [(0 , 2000)],
+
 
             
         }
 
         QShortcut(QKeySequence("Ctrl+o"), self).activated.connect(self.upload_signal_file)
-        
 
     def handleComboBox(self, index):
         # Hide or show controls in the stacked widget based on the index
@@ -149,13 +157,13 @@ class MyWindow(QMainWindow):
         return(freq_ranges)    
     
    
-    def min_max(self):
+    def min_max(self , grph_widget):
         '''
         this funcrion is to cala the min and max of graph to set it limits
         '''
 
-        x_min, x_max = self.ui.grph_input_sig.getViewBox().viewRange()[0]
-        y_min, y_max = self.ui.grph_input_sig.getViewBox().viewRange()[1]
+        x_min, x_max = grph_widget.getViewBox().viewRange()[0]
+        y_min, y_max = grph_widget.getViewBox().viewRange()[1]
 
         return x_min  , x_max , y_min , y_max
         
@@ -164,7 +172,8 @@ class MyWindow(QMainWindow):
         
         file_path , _ = QFileDialog.getOpenFileName(self, "Open Song", "~")
         
-            
+        self.ui.grph_input_sig.clear()
+        self.ui.grph_output_sig.clear()
         if file_path[-3:]== "csv":
             self.is_ecg = True
             print("csvvv")
@@ -174,9 +183,12 @@ class MyWindow(QMainWindow):
             self.original_sig = df.iloc[:, 1].values
             self.ui.grph_input_sig.clear()
             self.ui.grph_input_sig.plot(t , self.original_sig)
-            self.sample_rate = 125
+            self.ui.grph_input_sig.getViewBox().autoRange()
+            
+            self.sample_rate = 1/(t[1]-t[0])
+            print(self.sample_rate)
             self.spectogram(self.original_sig , 60 , self.spectrogram_canvas_input)
-            # self.ui.grph_input_sig.plotItem.vb.setLimits(xMin=0, xMax=7, yMin=0, yMax=100)
+            self.ui.grph_input_sig.plotItem.vb.setLimits(xMin=min(t), xMax=max(t), yMin=min(self.original_sig), yMax=max(self.original_sig))
             # self.play_audio(self.original_sig , 1 ,self.ui.input_slider , self.timer_1 )
             
         elif file_path[-3:]== "wav":
@@ -184,15 +196,16 @@ class MyWindow(QMainWindow):
             self.sample_rate, self.original_sig = wavfile.read(file_path)
             self.is_sound = True
             self.plot_audio_signal(self.original_sig , self.sample_rate , self.ui.grph_input_sig)
-
-        else :
-            pass
+        
+        self.reset_slider()
+        
 
             
             
         self.fourier_function()
         
     def plot_audio_signal(self , samples , sampling_rate , widget):
+
         peak_value = np.amax(samples)
         samples = samples / peak_value
         self.length = samples.shape[0] / sampling_rate
@@ -203,6 +216,8 @@ class MyWindow(QMainWindow):
         drawing_pen = pg.mkPen(color=(255, 0, 0), width=0.5)
         widget.clear()
         widget.plot(time, samples, pen=drawing_pen)
+        widget.plotItem.vb.setLimits( xMin=min(time) , xMax=max(time), yMin=min(samples) , yMax=max(samples)) 
+        widget.getViewBox().autoRange()
         self.spectogram(self.original_sig , self.sample_rate , self.spectrogram_canvas_input)
   
     def fourier_function(self):
@@ -212,17 +227,23 @@ class MyWindow(QMainWindow):
         phase = np.angle(complex_fft)
         frequency = np.fft.rfftfreq(len(self.original_sig), 1 / self.sample_rate)
         
+        self.ui.signal_view.clear()
         self.ui.signal_view.plot(frequency[:len(frequency)//2] , magnitude[:len(frequency)//2])
+        self.ui.signal_view.plotItem.vb.setLimits( xMin=min(frequency[:len(frequency)//2]) , xMax=max(frequency[:len(frequency)//2]), yMin=min(magnitude[:len(frequency)//2]) , yMax=max(magnitude[:len(frequency)//2])) 
+        self.ui.signal_view.getViewBox().autoRange()
+        self.plot_window()
+        
+        
 
         return magnitude, phase, frequency
 
     def window_function(self   , length  ,  window_type  , range ):
         print(f"here{window_type}")
         if window_type == 0 :
-            window = np.ones(length) 
+            window = np.hamming(length)
             print(0)
         elif window_type == 1:
-            window = np.hamming(length)
+            window = np.ones(length) 
             print(1)
         elif window_type == 2:
             window = np.hanning(length)
@@ -258,8 +279,13 @@ class MyWindow(QMainWindow):
         
         self.ui.signal_view.clear()
         self.ui.signal_view.plot(frequency[:len(frequency)//2] , magnitude[:len(frequency)//2])
+        self.ui.signal_view.plotItem.vb.setLimits( xMin=min(frequency[:len(frequency)//2]) , xMax=max(frequency[:len(frequency)//2]), yMin=min(magnitude[:len(frequency)//2]) , yMax=max(magnitude[:len(frequency)//2])) 
+        self.ui.signal_view.getViewBox().autoRange()
+        
+        
 
         self.plot_audio_signal(self.modified_signal , self.sample_rate , self.ui.grph_output_sig )
+        
         self.ui.graphicsView_rectangle.clear()
         for (window , range) in windows:
             self.ui.signal_view.plot(frequency[indices_to_modify] , magnitude[indices_to_modify])
@@ -267,6 +293,20 @@ class MyWindow(QMainWindow):
             # self.ui.graphicsView_rectangle.plot( window , pen ="r")
             print(range)
             self.ui.signal_view.plot(range , window , pen = pg.mkPen(color=(255, 0, 0), width=0.5))
+
+    def reset_slider(self):
+        for i in range(1, 10):
+            slider_name = f'uniform_slider_range_{i}'
+            current_slider = getattr(self.ui, slider_name)
+            print(current_slider.setValue(1))
+        self.ui.cat_slider.setValue(1)
+        self.ui.dog_slider.setValue(1)
+        self.ui.duck_slider.setValue(1)
+        self.ui.cow_slider.setValue(1)
+        self.ui.piano_slider.setValue(1)
+        self.ui.voil_slider.setValue(1)
+        self.ui.drum_slider.setValue(1)
+        self.ui.bass_slider.setValue(1)
 
     def plot_window(self  ):
         # window = self.window_function()
@@ -276,10 +316,10 @@ class MyWindow(QMainWindow):
             print("0")
             # self.ui.graphicsView_rectangle.plot( , pen ="r")
 
-            self.ui.graphicsView_rectangle.plot(window)
+            self.ui.graphicsView_hamming.plot(window)
         elif self.ui.windows_tabs.currentIndex() ==1:
             print("1")
-            self.ui.graphicsView_hamming.plot(window)
+            self.ui.graphicsView_rectangle.plot(window)
         elif self.ui.windows_tabs.currentIndex() ==2:
             print("2")
             self.ui.graphicsView_hanning.plot(window)
@@ -311,11 +351,13 @@ class MyWindow(QMainWindow):
         else:
             specto_grph_widget.hide()
       
-    def zoom(self , graph , state): # it state = 0 zoom out , 1 zoom in
+    def zoom(self  , state): # it state = 0 zoom out , 1 zoom in
         if state:
-            graph.getViewBox().scaleBy((1 / 1.2, 1 / 1.2))
+            self.ui.grph_input_sig.getViewBox().scaleBy((1 / 1.2, 1 / 1.2))
+            self.ui.grph_output_sig.getViewBox().scaleBy((1 / 1.2, 1 / 1.2))
         else:
-            graph.getViewBox().scaleBy((1.2, 1.2))
+            self.ui.grph_input_sig.getViewBox().scaleBy((1.2, 1.2))
+            self.ui.grph_output_sig.getViewBox().scaleBy((1.2, 1.2))
         
           
       
@@ -327,7 +369,9 @@ def main():
    
     window.showMaximized()
     window.show()
+    
     sys.exit(app.exec_())
+    
 
 if __name__ == '__main__':
     main()
