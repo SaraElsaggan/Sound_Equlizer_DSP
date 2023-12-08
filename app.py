@@ -1,3 +1,4 @@
+from scipy import signal
 from scipy.signal import gaussian
 from PyQt5.QtCore import QTimer
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
@@ -111,10 +112,14 @@ class MyWindow(QMainWindow):
         self.ui.uniform_slider_range_10.valueChanged.connect(lambda: self.modfy_frq_component(self.uniform_ranges()[9] ,self.ui.uniform_slider_range_10.value() )) 
 
         self.freq_ranges = {
-            "cat" : [(2200 , 2400)  , (550 , 600) , (1700 , 1800) , (2800 , 3000)],
-            "dog" : [(300 , 1700)],
-            "duck" :[ (450 , 550) , (800 , 840) ,( 880 , 920) , (960,  1000) , (1100 , 2200)], #duck2
-            "cow" : [(250, 400)],
+            "cat" :   [(2200 , 2400)  , (550 , 600) , (1700 , 1800) , (2800 , 3000)],
+            "dog" :  [(300 , 1700)],
+            "duck" :  [(450 , 550) , (800 , 840) ,( 880 , 920) , (960,  1000) , (1100 , 2200)], #duck2
+            "cow" :   [(250, 400)],
+            # "cat" : [self.ui.cat_slider , [1] , [(2200 , 2400)  , (550 , 600) , (1700 , 1800) , (2800 , 3000)]],
+            # "dog" : [self.ui.dog_slider , [1] ,[(300 , 1700)]],
+            # "duck" :[ self.ui.duck_slider , [1]  , [(450 , 550) , (800 , 840) ,( 880 , 920) , (960,  1000) , (1100 , 2200)]], #duck2
+            # "cow" : [self.ui.cow_slider , [1] , [(250, 400)]],
             
             # "dog" : [(220 , 300 ) , (520 , 680) , (800 , 850) , (900,  1000) , (1060 , 110) , (1040 , 1220)],
             # "duck" :[ (800, 2500)], #duck2
@@ -138,7 +143,7 @@ class MyWindow(QMainWindow):
 
             
         }
-
+        self.slider_history = [1]
         QShortcut(QKeySequence("Ctrl+o"), self).activated.connect(self.upload_signal_file)
 
     def handleComboBox(self, index):
@@ -151,8 +156,9 @@ class MyWindow(QMainWindow):
             slider.setValue(current_value + 100)  # Increment by 100 milliseconds
    
     def uniform_ranges(self ):
-        _ , __  , freq = self.fourier_function()
-        freq_batches = np.array_split(freq, 20)
+        # freq = self.frequency
+        # _ , __  , freq = self.fourier_function()
+        freq_batches = np.array_split(self.frequency, 20)
         freq_ranges = [[(batch[0], batch[-1])] for batch in freq_batches]
         return(freq_ranges)    
     
@@ -222,20 +228,23 @@ class MyWindow(QMainWindow):
   
     def fourier_function(self):
         complex_fft = np.fft.rfft(self.original_sig)
-        # magnitude = np.abs(complex_fft)
-        magnitude = np.abs(complex_fft / len(self.original_sig))
-        phase = np.angle(complex_fft)
-        frequency = np.fft.rfftfreq(len(self.original_sig), 1 / self.sample_rate)
+        self.magnitude = np.abs(complex_fft / len(self.original_sig))
+        self.phase = np.angle(complex_fft)
+        self.magnitude_to_bodfy = self.magnitude.copy()
+        # self.magnitude = np.abs(complex_fft)
+        self.frequency = np.fft.rfftfreq(len(self.original_sig), 1 / self.sample_rate)
+        
+        
         
         self.ui.signal_view.clear()
-        self.ui.signal_view.plot(frequency[:len(frequency)//2] , magnitude[:len(frequency)//2])
-        self.ui.signal_view.plotItem.vb.setLimits( xMin=min(frequency[:len(frequency)//2]) , xMax=max(frequency[:len(frequency)//2]), yMin=min(magnitude[:len(frequency)//2]) , yMax=max(magnitude[:len(frequency)//2])) 
+        self.ui.signal_view.plot(self.frequency[:len(self.frequency)//2] , self.magnitude[:len(self.frequency)//2])
+        self.ui.signal_view.plotItem.vb.setLimits( xMin=min(self.frequency[:len(self.frequency)//2]) , xMax=max(self.frequency[:len(self.frequency)//2]), yMin=min(self.magnitude[:len(self.frequency)//2]) , yMax=max(self.magnitude[:len(self.frequency)//2])) 
         self.ui.signal_view.getViewBox().autoRange()
         self.plot_window()
         
         
 
-        return magnitude, phase, frequency
+        # return magnitude, phase, frequency
 
     def window_function(self   , length  ,  window_type  , range ):
         print(f"here{window_type}")
@@ -243,7 +252,7 @@ class MyWindow(QMainWindow):
             window = np.hamming(length)
             print(0)
         elif window_type == 1:
-            window = np.ones(length) 
+            window = signal.windows.boxcar(length) 
             print(1)
         elif window_type == 2:
             window = np.hanning(length)
@@ -265,30 +274,60 @@ class MyWindow(QMainWindow):
         print(freq_range)
         print("please")
         windows = []
-        magnitude, phase, frequency = self.fourier_function()
-        for range in freq_range:
-            indices_to_modify = np.where((frequency >= range[0]) & (frequency <= range[1]))[0]
+        '''
+        # slider = freq_range[0]
+        slider_history  = freq_range[1]
+        
+        slider_history.append(slider_gain)
+        # magnitude, phase, frequency = self.fourier_function()
+        for range in freq_range[2]:
+            print(f"range{range}")
+            indices_to_modify = np.where((self.frequency >= range[0]) & (self.frequency <= range[1]))[0]
             
             window = self.window_function( len(magnitude[indices_to_modify])  , self.ui.windows_tabs.currentIndex() , range) 
-            magnitude[indices_to_modify] *= slider_gain *window
-            windows.append((window * max(magnitude[indices_to_modify]) ,frequency[indices_to_modify]))
-        complex_signal = magnitude * np.exp(1j * phase)
+            # magnitude[indices_to_modify] *= (slider_gain/(slider_gain-1)) *window
+            copy = magnitude[indices_to_modify]
+            # if slider_gain == 0:
+            if slider_history[0] == 0:
+                magnitude[indices_to_modify] =copy * (slider_gain) *window
+            else:
+                magnitude[indices_to_modify] *= (slider_gain/(slider_history[0])) *window
+            windows.append((window * max(magnitude[indices_to_modify]) ,self.frequency[indices_to_modify]))
+            
+        complex_signal = magnitude * np.exp(1j * self.phase)
         self.modified_signal = np. fft.irfft(complex_signal)
-        self.spectogram(self.modified_signal , self.sample_rate , self.spectrogram_canvas_output)
+        slider_history.pop(0)
+        '''
+        # magnitude, phase, frequency = self.fourier_function()
+        for range in freq_range:
+            indices_to_modify = np.where((self.frequency >= range[0]) & (self.frequency <= range[1]))[0]
+            print(f"indices_to_modify{indices_to_modify}")
+            
+            window = self.window_function( len(self.magnitude[indices_to_modify])  , self.ui.windows_tabs.currentIndex() , range) 
 
+            self.magnitude_to_bodfy[indices_to_modify] = self.magnitude[indices_to_modify] * slider_gain *window
+            print(f"diff : {self.magnitude_to_bodfy[indices_to_modify] - self.magnitude[indices_to_modify]}")
+            windows.append((window * max(self.magnitude_to_bodfy[indices_to_modify]) ,self.frequency[indices_to_modify]))
+
+        complex_signal = self.magnitude_to_bodfy * np.exp(1j * self.phase)
+        self.modified_signal = np. fft.irfft(complex_signal)
         
+        
+        
+        
+        self.spectogram(self.modified_signal , self.sample_rate , self.spectrogram_canvas_output)  
         self.ui.signal_view.clear()
-        self.ui.signal_view.plot(frequency[:len(frequency)//2] , magnitude[:len(frequency)//2])
-        self.ui.signal_view.plotItem.vb.setLimits( xMin=min(frequency[:len(frequency)//2]) , xMax=max(frequency[:len(frequency)//2]), yMin=min(magnitude[:len(frequency)//2]) , yMax=max(magnitude[:len(frequency)//2])) 
-        self.ui.signal_view.getViewBox().autoRange()
+        self.ui.signal_view.plot(self.frequency[:len(self.frequency)//2] , self.magnitude_to_bodfy[:len(self.frequency)//2])
+        # self.ui.signal_view.plotItem.vb.setLimits( xMin=min(self.frequency[:len(self.frequency)//2]) , xMax=max(self.frequency[:len(self.frequency)//2]), yMin=min(self.magnitude[:len(self.frequency)//2]) , yMax=max(self.magnitude[:len(self.frequency)//2])) 
+        # self.ui.signal_view.getViewBox().autoRange()
         
         
 
         self.plot_audio_signal(self.modified_signal , self.sample_rate , self.ui.grph_output_sig )
         
-        self.ui.graphicsView_rectangle.clear()
+        # self.ui.graphicsView_rectangle.clear()
         for (window , range) in windows:
-            self.ui.signal_view.plot(frequency[indices_to_modify] , magnitude[indices_to_modify])
+            self.ui.signal_view.plot(self.frequency[indices_to_modify] , self.magnitude_to_bodfy[indices_to_modify])
             # self.ui.graphicsView_rectangle.plot(frequency[indices_to_modify] , magnitude[indices_to_modify])
             # self.ui.graphicsView_rectangle.plot( window , pen ="r")
             print(range)
