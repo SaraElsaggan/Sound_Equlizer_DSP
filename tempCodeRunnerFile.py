@@ -1,1 +1,2 @@
-i.actionUpload_fi
+
+        # samples = samples / peak_value
