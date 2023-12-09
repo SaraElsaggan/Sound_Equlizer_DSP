@@ -13,12 +13,6 @@
     <height>1286</height>
    </rect>
   </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
-  </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
@@ -506,12 +500,6 @@ color: rgb(255, 255, 255);
      <layout class="QHBoxLayout" name="horizontalLayout_23">
       <item>
        <widget class="PlotWidget" name="signal_view">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Maximum" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -519,12 +507,6 @@ color: rgb(255, 255, 255);
       </item>
       <item>
        <widget class="QTabWidget" name="windows_tabs">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-          <horstretch>90</horstretch>
-          <verstretch>90</verstretch>
-         </sizepolicy>
-        </property>
         <property name="font">
          <font>
           <bold>true</bold>
@@ -557,7 +539,7 @@ QTabWidget::pane {
 </string>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="Hamming_window">
          <attribute name="title">
@@ -594,8 +576,33 @@ QTabWidget::pane {
           <string>Gaussian</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_6">
-          <item row="0" column="0">
-           <widget class="PlotWidget" name="graphicsView_gaussian"/>
+          <item row="0" column="1">
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <widget class="PlotWidget" name="graphicsView_gaussian"/>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>enter std</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="std_input"/>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_apply">
+                <property name="text">
+                 <string>apply</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -686,7 +693,7 @@ QLabel{
 font-weight: bold;}</string>
           </property>
           <property name="currentIndex">
-           <number>1</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="uniform_page">
            <layout class="QGridLayout" name="gridLayout">
@@ -852,7 +859,7 @@ font-weight: bold;}</string>
                 <item>
                  <widget class="QLabel" name="label_35">
                   <property name="text">
-                   <string>drum</string>
+                   <string>bass</string>
                   </property>
                  </widget>
                 </item>
@@ -1045,7 +1052,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_35">
                 <item>
-                 <widget class="QSlider" name="verticalSlider_27">
+                 <widget class="QSlider" name="arthmya_1_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -1069,7 +1076,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_36">
                 <item>
-                 <widget class="QSlider" name="verticalSlider_31">
+                 <widget class="QSlider" name="arthmya_2_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -1093,7 +1100,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_37">
                 <item>
-                 <widget class="QSlider" name="verticalSlider_32">
+                 <widget class="QSlider" name="arthmya_3_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -1117,7 +1124,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_38">
                 <item>
-                 <widget class="QSlider" name="verticalSlider_34">
+                 <widget class="QSlider" name="arthmya_4_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -1148,12 +1155,6 @@ font-weight: bold;}</string>
       </item>
       <item>
        <spacer name="horizontalSpacer">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-          <horstretch>90</horstretch>
-          <verstretch>90</verstretch>
-         </sizepolicy>
-        </property>
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
