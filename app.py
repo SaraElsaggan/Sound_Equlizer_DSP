@@ -1,3 +1,8 @@
+'''
+code reptesion done exept some part of lsider and windowing
+animal mode has some problems
+gutar range is not the best
+'''
 from scipy import signal
 from scipy.signal import gaussian
 from PyQt5.QtCore import QTimer
@@ -9,7 +14,7 @@ from scipy.signal import spectrogram
 from scipy.signal import resample
 import sys
 from PyQt5.QtGui import QIcon, QKeySequence
-from mainwindow import Ui_MainWindow
+from mainwindow import Ui_MainWindow , PlotWidget
 import numpy as np
 import pandas as pd
 from scipy.io import wavfile
@@ -35,8 +40,9 @@ class MyWindow(QMainWindow):
       
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)  
-        
+
         # Set the checkbox to be checked by default
+        self.ui.std_input.setText("5000")
         self.ui.chek_bx_show_spect_input.setChecked(True)
         self.ui.chek_bx_show_spect_output.setChecked(True)
         # Set the default page to index 0
@@ -82,7 +88,7 @@ class MyWindow(QMainWindow):
         self.ui.btn_fast_input.clicked.connect(lambda: self.playpack_speed(1))
         self.ui.btn_slow_input.clicked.connect(lambda: self.playpack_speed(0))
         
-        self.ui.windows_tabs.currentChanged.connect(self.plot_window)
+        self.ui.windows_tabs.currentChanged.connect(lambda :self.window_function(5000 , self.ui.windows_tabs.currentIndex()))
         # self.ui.btn_apply.clicked.connect(self.modfy_frq_component())
         
         # self.ui.btn_srt_begin_input.clicked.connect(lambda :self.pause(self.timer_1))
@@ -90,19 +96,31 @@ class MyWindow(QMainWindow):
         self.ui.btn_srt_begin_output.clicked.connect(lambda :self.play_audio(self.modified_signal , 8 , self.ui.output_slider , self.timer_2 ,self.timer_1 ))
         
         
-        self.slider_names = ["bass", "voil", "piano", "drum" , "cat" , "dog" , "duck",  "cow" ,"arthmya_1" , "arthmya_2" , "arthmya_3"  , "arthmya_4"]
+        # self.slider_names = ["bass", "voil", "piano", "drum" , "cat" , "dog" , "duck",  "cow" ,"arthmya_1" , "arthmya_2" , "arthmya_3"  , "arthmya_4" , "range_1", "range_2", "range_3", "range_4", "range_5", "range_6"]
 
-        for name in self.slider_names:
-            slider = getattr(self.ui, f"{name}_slider")
-            slider.valueChanged.connect(lambda value, n=name: self.modfy_frq_component(self.freq_ranges[n], value))
-
+    
         
-        for i in range(1, 11):
-            slider = getattr(self.ui, f"uniform_slider_range_{i}")
-            slider.valueChanged.connect(lambda value, idx=i-1: self.modfy_frq_component(self.uniform_ranges()[idx], value))
+        # for i in range(1, 11):
+        #     slider = getattr(self.ui, f"uniform_slider_range_{i}")
+        #     slider.valueChanged.connect(lambda value, idx=i-1: self.modfy_frq_component(self.uniform_ranges()[idx], value))
 
        
         self.freq_ranges = {
+            "range_1":[],      
+            "range_2":[],      
+            "range_3":[],      
+            "range_4":[],      
+            "range_5":[],      
+            "range_6":[],      
+            "range_7":[],      
+            "range_8":[],      
+            "range_9":[],      
+            "range_10":[],      
+            
+           
+            
+
+
             "cat" :   [(500 , 605) , (1000 , 1200) , (2200 , 2400)  , (550 , 600) , (1700 , 1800) , (2750 , 3000) , (3300 , 3500) , (3900 , 4200) , (4500 , 4700 ) , (5100 , 5300)], #new sound not completly disapear but the cat sound is lowr
             "dog" :  [(200 , 1133) , (1150 , 1900)], #new so bad 
             "duck" :  [(400 , 550) , (800 , 840) ,( 880 , 920) , (960,  1000) , (1100 , 2200)], #duck2
@@ -113,23 +131,152 @@ class MyWindow(QMainWindow):
             "piano" : [(260 , 264 ) , (520 , 532) ,  (780 , 790) ,  (1045 , 1052) , (1574 , 1584) , (1840 , 1850)], #done
             "drum" : [(25 , 150) , (156 , 170  ) , (200 , 264) ,(264 , 300) , (360 , 440) , (485 , 520 ), (532 , 640) , (640 , 780)  , (900 , 950 ) , (1020 , 1045) , (1052 , 1140) , (1160 , 1220) , (1300 , 1350)  , (1420 , 1460) , (1540 , 1600) , (1680 , 1730) , (1830 , 1860) , (1960 , 2000) , (2090 , 2130) , (2220 , 2270) , (2370 , 2400) , (2780 , 2810) , (2920 , 2950) , (3060 , 3090) , (3190 , 3220) ], #new gitur
 
-            "arthmya_1" : [(81 , 100) , (58 , 75) , (160, 175)],
-            "arthmya_2" : [(110 , 120) , (140 , 150) ],
-            "arthmya_3" : [(81 , 100)  ,(268 , 280 ) , (140 , 150) , (190 , 200)],
+            # # "arthmya_1" : [(81 , 100) , (58 , 75) , (160, 175)],
+            # # "arthmya_2" : [(110 , 120) , (140 , 150) ],
+            # # "arthmya_3" : [(81 , 100)  ,(268 , 280 ) , (140 , 150) , (190 , 200)],
+
+
+            "arthmya_1" : [(2 , 3.9) , (5 , 5.9) ],
+            "arthmya_2" : [(6.6 , 7.5) , (17.4 , 18) ],
+            "arthmya_3" : [(9.5 , 10.5)  ,(12.8, 13.4) , (8 , 9)],
+            "arthmya_4" : [(1.4 , 2) , (2.9 , 3.4) , (4.4, 5) , (5.9 , 6.6) , (7.5 , 8) , (9 , 9.5) , (10.5 , 11.2) , (12 , 12.8) , (13.4 , 14.4) , (15 , 16) , (16.6 , 17.4) , (18 ,19)],
+
+
+
+            # '''outside'''
+            # "arthmya_1" : [(2 , 2.9) ],
+            # "arthmya_2" : [(3.4 , 4.4) ],
+            # "arthmya_3" : [(5 , 5.9) ],
+            # "arthmya_4" : [(6.6 , 7.5) ],
+            
+            # "cat" :   [(8 , 9) ],
+            # "dog" :  [(9.5 , 10.5)],
+            # "duck" :  [(11.2 , 12) ], #duck2
+            # "cow" :   [(12.8, 13.4)],
+            
+            # "bass" : [(14.4 , 15)] , 
+            # "voil" : [(16 , 16.6 ) ],
+            # "piano" : [(17.4 , 18 ) ],
+            # "drum" : [(19 , 20)],
+            
+            # # '''outside random'''
+            # "arthmya_1" : [(33 , 54) ],
+            # "arthmya_2" : [(61 , 73) ],
+            # "arthmya_3" : [(88 , 109) ],
+            # "arthmya_4" : [(111 , 120) ],
+            
+            # "cat" :   [(140 , 150) ],
+            # "dog" :  [(160 , 175)],
+            # "duck" :  [(180 , 206) ], #duck2
+            # "cow" :   [(220, 230)],
+            
+            # "bass" : [(240 , 180)] , 
+            # "voil" : [(186 , 255 ) ],
+            # "piano" : [(270 , 283 ) ],
+            # "drum" : [(300 , 320)],
+            
+            
+            
+            
+            # '''step 20'''
+            
+            # "arthmya_1" : [(0 , 20) ],
+            # "arthmya_2" : [(20 , 40) ],
+            # "arthmya_3" : [(40 , 60) ],
+            # "arthmya_4" : [(60 , 80) ],
+            
+            # "cat" :   [(80 , 100) ],
+            # "dog" :  [(100 , 120)],
+            # "duck" :  [(120 , 140) ], #duck2
+            # "cow" :   [(140, 160)],
+            
+            # "bass" : [(160 , 180)] , 
+            # "voil" : [(180 , 200 ) ],
+            # "piano" : [(220 , 240 ) ],
+            # "drum" : [(240 , 260)],
+            # '''actual normal ranges'''
+            # "arthmya_1" : [(23 , 30) ],
+            # "arthmya_2" : [(50 , 58) ],
+            # "arthmya_3" : [(75 , 81) ],
+            
+            # "cat" :   [(100 , 110) ],
+            # "dog" :  [(120 , 140)],
+            # "duck" :  [(150 , 160) ], #duck2
+            # "cow" :   [(175, 190)],
+            
+            # "bass" : [(200 , 220)] , 
+            # "voil" : [(230 , 240 ) ],
+            # "piano" : [(255 , 268 ) ],
+            # "drum" : [(280 , 300)],
 
             
+            
         }
+   
+   
+        for name in self.freq_ranges:
+            slider = getattr(self.ui, f"{name}_slider")
+            slider.valueChanged.connect(lambda value, n=name: self.modfy_frq_component(self.freq_ranges[n], value))
+
+    
         self.slider_history = [1]
 
         QShortcut(QKeySequence("Ctrl+o"), self).activated.connect(self.upload_signal_file)
     
         QShortcut(QKeySequence("Ctrl+m"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(1))
         QShortcut(QKeySequence("Ctrl+b"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(3))
-        QShortcut(QKeySequence("Ctrl+p"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(2))
+        QShortcut(QKeySequence("Ctrl+n"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(2))
         QShortcut(QKeySequence("Ctrl+u"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(0))
 
+        QShortcut(QKeySequence("Ctrl+]"), self).activated.connect(self.open_normal)
+        QShortcut(QKeySequence("Ctrl+s"), self).activated.connect(self.save_ecg_file)
 
 
+    def open_normal(self):
+        file_path = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/normal_ecg.csv"
+        df = pd.read_csv(file_path)
+            # t = np.arange(0 , 7 , 1/125)
+        t = df.iloc[:, 0].values
+        self.original_sig = df.iloc[:, 1].values
+        self.ui.grph_input_sig.clear()
+        self.ui.grph_input_sig.plot(t , self.original_sig)
+        self.ui.grph_input_sig.getViewBox().autoRange()
+        
+        self.sample_rate = 1/(t[1]-t[0])
+        self.spectogram(self.original_sig , 60 , self.spectrogram_canvas_input)
+        self.reset_slider()
+        
+        # file_path  = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/music/violin-C5.wav"
+        # file_path  = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/animal/cat_1_cow_dog_2_suck_2.wav"
+        # file_path  = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/music/pc4_drykickone_vc5_bass10.wav"
+        # file_path  = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/music/pc4_drykickone_vc5_bass10.wav"
+        
+        # self.ui.grph_input_sig.clear()
+        # self.ui.grph_output_sig.clear()
+        
+        # self.sample_rate, self.original_sig = wavfile.read(file_path)
+        # self.is_sound = True
+        # self.plot_audio_signal(self.original_sig , self.sample_rate , self.ui.grph_input_sig)
+        
+        self.reset_slider()
+        
+
+            
+            
+        self.fourier_function()
+        
+    def save_ecg_file(self):
+        # modified_df = pd.DataFrame({np.arange(0, len(self.modified_signal)) / self.sample_rate, self.modified_signal})
+        # modified_df = pd.DataFrame({np.arange(0, len(self.modified_signal)) / self.sample_rate, self.modified_signal})
+        # modified_df = pd.DataFrame([np.arange(0, len(self.modified_signal)) / self.sample_rate, self.modified_signal])
+# 
+
+        modified_df = pd.DataFrame({'Time': np.arange(0, len(self.modified_signal)) / self.sample_rate,'Modified_Signal': self.modified_signal})
+        
+        modified_file_path, _ = QFileDialog.getSaveFileName(self, "Save Modified Signal", "~", "CSV Files (*.csv)")
+        if modified_file_path:
+                modified_df.to_csv(modified_file_path, index=False)
+    
     
     def handleComboBox(self, index):
         self.ui.stackedWidget.setCurrentIndex(index)
@@ -141,8 +288,17 @@ class MyWindow(QMainWindow):
    
     def uniform_ranges(self ):
         freq_batches = np.array_split(self.frequency, 10)
-        freq_ranges = [[(batch[0], batch[-1])] for batch in freq_batches]
-        return(freq_ranges)    
+        for i, batch in enumerate(freq_batches):
+            idx=i+1
+            key = f"range_{idx}"
+
+            if self.freq_ranges[key]:
+                self.freq_ranges[key].clear()
+
+            self.freq_ranges[key].append((batch[0], batch[-1]))
+
+        # freq_ranges = [[(batch[0], batch[-1])] for batch in freq_batches]
+        # return(freq_ranges)    
     
    
     def min_max(self , grph_widget):
@@ -159,12 +315,10 @@ class MyWindow(QMainWindow):
     def upload_signal_file(self):
         
         file_path , _ = QFileDialog.getOpenFileName(self, "Open Song", "~")
-        print(file_path)
         
         if file_path[-3:]== "csv":
             self.is_sound = False
             self.is_ecg = True
-            print("csvvv")
             df = pd.read_csv(file_path)
             self.time = df.iloc[:, 0].values
             self.original_sig = df.iloc[:, 1].values
@@ -173,15 +327,14 @@ class MyWindow(QMainWindow):
         elif file_path[-3:]== "wav":
             self.is_sound = True
             self.is_ecg = False
-            print("wavvv")
             self.sample_rate, self.original_sig = wavfile.read(file_path)
             self.time = np.array(range(0 , len(self.original_sig) )) / self.sample_rate
 
         self.plot_signal(self.time , self.original_sig , self.sample_rate , self.ui.grph_input_sig)
-        
         self.reset_slider()
         
         self.fourier_function()
+        self.uniform_ranges()
         
     def plot_signal(self ,time ,  samples , sampling_rate , widget):
 
@@ -200,18 +353,15 @@ class MyWindow(QMainWindow):
         self.frequency = np.fft.rfftfreq(len(self.original_sig), 1 / self.sample_rate)
         self.magnitude_to_bodfy = self.magnitude.copy()
         
-        print(f"freq shape {self.frequency.shape} ,magnitude.shape {self.magnitude.shape}")
-        print(f"slef.magnitude {self.magnitude}")
         
         
         self.plot_specrtum(self.frequency , self.magnitude)
-        self.plot_window()
+        # self.plot_window()
         
         
 
 
     def window_function(self   , length  ,  window_type  ):
-        print(f"here{window_type}")
         if window_type == 0 :
             window = np.hamming(length)
         elif window_type == 1:
@@ -220,7 +370,14 @@ class MyWindow(QMainWindow):
             window = np.hanning(length)
         elif window_type == 3:
             window = gaussian(length , std = int(self.ui.std_input.text()))
+
+        # Assuming the graph widget is a direct child of the page widget
         
+        page_widget = self.ui.windows_tabs.widget(window_type)
+        graph_widget = page_widget.findChild(PlotWidget)
+        graph_widget.clear()
+        graph_widget.plot(window)
+
         return window
             
     def playpack_speed(self , speed):
@@ -233,8 +390,6 @@ class MyWindow(QMainWindow):
         
     def modfy_frq_component(self, freq_range , slider_gain ):
         all_indices = np.array([], dtype=int)
-        print(freq_range)
-        print("please")
         windows = []
         for range in freq_range:
             indices_to_modify = np.where((self.frequency >= range[0]) & (self.frequency <= range[1]))[0]
@@ -246,37 +401,45 @@ class MyWindow(QMainWindow):
         window = self.window_function( len(self.magnitude[all_indices])  , self.ui.windows_tabs.currentIndex() ) 
 
         self.magnitude_to_bodfy[all_indices] = self.magnitude[all_indices] * slider_gain *window
-        print(f"diff : {self.magnitude_to_bodfy[all_indices] - self.magnitude[all_indices]}")
         windows.append((window * max(self.magnitude_to_bodfy[all_indices]) ,self.frequency[all_indices]))
 
         
         
         self.plot_specrtum(self.frequency , self.magnitude_to_bodfy)
-        
-        if self.ui.combo_bx_mode.currentIndex() == 0:
-            print("uniform mode")
-            window = self.window_function(1102, self.ui.windows_tabs.currentIndex())
-    
-            for range in self.uniform_ranges():
-                my_range = np.where((self.frequency >= range[0][0]) & (self.frequency <= range[0][1]))[0]
-                print(f"range[0]{range}")
-                print(f"points{int(range[0][0])}, {int(range[0][1])}")
-                self.ui.signal_view.plot(self.frequency[my_range] , self.window_function(len(self.frequency[my_range] ), self.ui.windows_tabs.currentIndex()) *max(self.magnitude_to_bodfy[my_range]) , pen =pg.mkPen(color=(255, 0, 0)))
-            print(f"range length {len(self.frequency[int(range[0][0]) :int(range[0][1])])}")
-
-            # for window in windows:
-        else:
-            for range in freq_range:
-                print(f"range[0]{range}")
-                my_range = np.where((self.frequency >= range[0]) & (self.frequency <= range[1]))[0]
-                self.ui.signal_view.plot(self.frequency[my_range] , self.window_function(len(self.frequency[my_range] ), self.ui.windows_tabs.currentIndex()) *max(self.magnitude_to_bodfy[my_range]) , pen =pg.mkPen(color=(255, 0, 0)))
-        
-
         complex_signal = self.magnitude_to_bodfy * np.exp(1j * self.phase)
         self.modified_signal = np. fft.irfft(complex_signal)
         self.plot_signal(self.time ,self.modified_signal , self.sample_rate , self.ui.grph_output_sig )
         self.spectogram(self.modified_signal , self.sample_rate , self.spectrogram_canvas_output)  
+        
+        self.plot_windw( freq_range)
+        # if self.ui.combo_bx_mode.currentIndex() == 0:
+        #     self.plot_windw()
+        #     # window = self.window_function(1102, self.ui.windows_tabs.currentIndex())
+    
+        #     # for _ ,range in list(self.freq_ranges.items())[:10]:
+        #     #     my_range = np.where((self.frequency >= range[0]) & (self.frequency <= range[1]))[0]
+        #     #     self.ui.signal_view.plot(self.frequency[my_range] , self.window_function(len(self.frequency[my_range] ), self.ui.windows_tabs.currentIndex()) *max(self.magnitude_to_bodfy[my_range]) , pen =pg.mkPen(color=(255, 0, 0)))
 
+        #     # for window in windows:
+        # else:
+        #     for range in freq_range:
+        #         my_range = np.where((self.frequency >= range[0]) & (self.frequency <= range[1]))[0]
+        #         self.ui.signal_view.plot(self.frequency[my_range] , self.window_function(len(self.frequency[my_range] ), self.ui.windows_tabs.currentIndex()) *max(self.magnitude_to_bodfy[my_range]) , pen =pg.mkPen(color=(255, 0, 0)))
+        
+
+    def plot_windw(self , freq_range):
+        
+        if self.ui.combo_bx_mode.currentIndex() == 0:
+            for _ ,range in list(self.freq_ranges.items())[:10]:
+                my_range = np.where((self.frequency >= range[0][0]) & (self.frequency <= range[0][1]))[0]
+                self.ui.signal_view.plot(self.frequency[my_range] , self.window_function(len(self.frequency[my_range] ), self.ui.windows_tabs.currentIndex()) *max(self.magnitude_to_bodfy[my_range]) , pen =pg.mkPen(color=(255, 0, 0)))
+            
+        else:
+            for range in freq_range:
+                my_range = np.where((self.frequency >= range[0]) & (self.frequency <= range[1]))[0]
+                self.ui.signal_view.plot(self.frequency[my_range] , self.window_function(len(self.frequency[my_range] ), self.ui.windows_tabs.currentIndex()) *max(self.magnitude_to_bodfy[my_range]) , pen =pg.mkPen(color=(255, 0, 0)))
+        
+    
     def plot_specrtum(self , freq , magnitude):
         self.ui.signal_view.clear()
         self.ui.signal_view.plot(freq , magnitude)
@@ -285,25 +448,20 @@ class MyWindow(QMainWindow):
         
    
     def reset_slider(self):
-        for i in range(1, 10):
-            slider_name = f'uniform_slider_range_{i}'
-            current_slider = getattr(self.ui, slider_name)
-            current_slider.setValue(1)
-            
-        for name in self.slider_names:
+        for name in self.freq_ranges:
             slider = getattr(self.ui, f"{name}_slider")
             slider.setValue(1)
 
-    def plot_window(self  ):
-        window = self.window_function(50000 ,  self.ui.windows_tabs.currentIndex() )
-        if self.ui.windows_tabs.currentIndex() ==0:
-            self.ui.graphicsView_hamming.plot(window)
-        elif self.ui.windows_tabs.currentIndex() ==1:
-            self.ui.graphicsView_rectangle.plot(window)
-        elif self.ui.windows_tabs.currentIndex() ==2:
-            self.ui.graphicsView_hanning.plot(window)
-        elif self.ui.windows_tabs.currentIndex() ==3:   
-            self.ui.graphicsView_gaussian.plot(gaussian(5 , 1))
+    # def plot_window(self  ):
+    #     window = self.window_function(50000 ,  self.ui.windows_tabs.currentIndex() )
+    #     if self.ui.windows_tabs.currentIndex() ==0:
+    #         self.ui.graphicsView_hamming.plot(window)
+    #     elif self.ui.windows_tabs.currentIndex() ==1:
+    #         self.ui.graphicsView_rectangle.plot(window)
+    #     elif self.ui.windows_tabs.currentIndex() ==2:
+    #         self.ui.graphicsView_hanning.plot(window)
+    #     elif self.ui.windows_tabs.currentIndex() ==3:   
+    #         self.ui.graphicsView_gaussian.plot(gaussian(5 , 1))
 
     def pause(self , timer):
         timer.stop()
@@ -332,7 +490,7 @@ class MyWindow(QMainWindow):
         self.ui.grph_input_sig.getViewBox().scaleBy((state, state))
         self.ui.grph_output_sig.getViewBox().scaleBy((state, state))
         
-          
+        
       
 
 def main():

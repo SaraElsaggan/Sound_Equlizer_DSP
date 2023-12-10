@@ -593,13 +593,6 @@ QTabWidget::pane {
               <item>
                <widget class="QLineEdit" name="std_input"/>
               </item>
-              <item>
-               <widget class="QPushButton" name="btn_apply">
-                <property name="text">
-                 <string>apply</string>
-                </property>
-               </widget>
-              </item>
              </layout>
             </item>
            </layout>
@@ -693,12 +686,12 @@ QLabel{
 font-weight: bold;}</string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="uniform_page">
            <layout class="QGridLayout" name="gridLayout">
             <item row="0" column="0">
-             <widget class="QSlider" name="uniform_slider_range_1">
+             <widget class="QSlider" name="range_1_slider">
               <property name="font">
                <font>
                 <bold>false</bold>
@@ -716,7 +709,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QSlider" name="uniform_slider_range_2">
+             <widget class="QSlider" name="range_2_slider">
               <property name="maximum">
                <number>10</number>
               </property>
@@ -729,7 +722,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="2">
-             <widget class="QSlider" name="uniform_slider_range_3">
+             <widget class="QSlider" name="range_3_slider">
               <property name="maximum">
                <number>10</number>
               </property>
@@ -742,7 +735,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="3">
-             <widget class="QSlider" name="uniform_slider_range_4">
+             <widget class="QSlider" name="range_4_slider">
               <property name="maximum">
                <number>10</number>
               </property>
@@ -755,7 +748,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="4">
-             <widget class="QSlider" name="uniform_slider_range_5">
+             <widget class="QSlider" name="range_5_slider">
               <property name="maximum">
                <number>10</number>
               </property>
@@ -768,7 +761,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="5">
-             <widget class="QSlider" name="uniform_slider_range_6">
+             <widget class="QSlider" name="range_6_slider">
               <property name="maximum">
                <number>10</number>
               </property>
@@ -784,7 +777,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="6">
-             <widget class="QSlider" name="uniform_slider_range_7">
+             <widget class="QSlider" name="range_7_slider">
               <property name="maximum">
                <number>10</number>
               </property>
@@ -797,7 +790,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="7">
-             <widget class="QSlider" name="uniform_slider_range_8">
+             <widget class="QSlider" name="range_8_slider">
               <property name="maximum">
                <number>10</number>
               </property>
@@ -810,7 +803,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="8">
-             <widget class="QSlider" name="uniform_slider_range_9">
+             <widget class="QSlider" name="range_9_slider">
               <property name="maximum">
                <number>10</number>
               </property>
@@ -823,7 +816,7 @@ font-weight: bold;}</string>
              </widget>
             </item>
             <item row="0" column="9">
-             <widget class="QSlider" name="uniform_slider_range_10">
+             <widget class="QSlider" name="range_10_slider">
               <property name="maximum">
                <number>10</number>
               </property>
