@@ -312,64 +312,6 @@ color: rgb(255, 255, 255);
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="btn_srt_begin_output">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="toolTip">
-             <string>replay</string>
-            </property>
-            <property name="whatsThis">
-             <string>stast from beging
-</string>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>imgs/strt_frm_begin.png</normaloff>imgs/strt_frm_begin.png</iconset>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btn_slow_output">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>imgs/slow_down.png</normaloff>imgs/slow_down.png</iconset>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btn_zoom_out_output">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>imgs/aoom_out.png</normaloff>imgs/aoom_out.png</iconset>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
            <widget class="QPushButton" name="btn_play_output">
             <property name="cursor">
              <cursorShape>PointingHandCursor</cursorShape>
@@ -405,40 +347,6 @@ color: rgb(255, 255, 255);
             <property name="icon">
              <iconset>
               <normaloff>imgs/pause.png</normaloff>imgs/pause.png</iconset>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btn_zoom_in_output">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>imgs/zoom_in.png</normaloff>imgs/zoom_in.png</iconset>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="btn_fast_output">
-            <property name="cursor">
-             <cursorShape>PointingHandCursor</cursorShape>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="icon">
-             <iconset>
-              <normaloff>imgs/speed_up.png</normaloff>imgs/speed_up.png</iconset>
             </property>
             <property name="flat">
              <bool>true</bool>
@@ -686,7 +594,7 @@ QLabel{
 font-weight: bold;}</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="uniform_page">
            <layout class="QGridLayout" name="gridLayout">
@@ -924,7 +832,7 @@ font-weight: bold;}</string>
                 <item>
                  <widget class="QLabel" name="label_38">
                   <property name="text">
-                   <string>drum</string>
+                   <string>Xylophon</string>
                   </property>
                  </widget>
                 </item>
@@ -1132,7 +1040,7 @@ font-weight: bold;}</string>
                 <item>
                  <widget class="QLabel" name="label_50">
                   <property name="text">
-                   <string>TextLabel</string>
+                   <string>normal</string>
                   </property>
                  </widget>
                 </item>

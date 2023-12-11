@@ -1,5 +1,6 @@
 '''
-code reptesion done exept some part of lsider and windowing
+code reptesion done exept some part of  windowing
+here is a function for the ecg signal
 animal mode has some problems
 gutar range is not the best
 '''
@@ -74,13 +75,11 @@ class MyWindow(QMainWindow):
         self.ui.btn_zoom_in_input.clicked.connect(lambda: self.zoom( 1 / 1.2))
         self.ui.btn_zoom_out_input.clicked.connect(lambda: self.zoom(  1.2))
 
-        self.ui.btn_zoom_in_output.clicked.connect(lambda: self.zoom( 1))
-        self.ui.btn_zoom_out_output.clicked.connect(lambda: self.zoom( 0))
 
         # self.ui.actionUpload_file.triggered.connect(self.upload_signal_file)
         
         self.ui.btn_play_input.clicked.connect(lambda: self.play_audio(self.original_sig , 1 , self.ui.input_slider , self.timer_1 , self.timer_2)) #this is for the input signal
-        self.ui.btn_play_output.clicked.connect(lambda: self.play_audio(self.modified_signal , 5 , self.ui.output_slider , self.timer_2 , self.timer_1)) #this is for the input signal
+        self.ui.btn_play_output.clicked.connect(lambda: self.play_audio(self.modified_signal , 8 , self.ui.output_slider , self.timer_2 , self.timer_1)) #this is for the input signal
 
         self.ui.btn_pause_input.clicked.connect(lambda:self.pause(self.timer_1))
         self.ui.btn_pause_output.clicked.connect(lambda:self.pause(self.timer_2))
@@ -93,7 +92,6 @@ class MyWindow(QMainWindow):
         
         # self.ui.btn_srt_begin_input.clicked.connect(lambda :self.pause(self.timer_1))
         self.ui.btn_srt_begin_input.clicked.connect(lambda :self.play_audio(self.original_sig , 1 , self.ui.input_slider , self.timer_1 , self.timer_2))
-        self.ui.btn_srt_begin_output.clicked.connect(lambda :self.play_audio(self.modified_signal , 8 , self.ui.output_slider , self.timer_2 ,self.timer_1 ))
         
         
         # self.slider_names = ["bass", "voil", "piano", "drum" , "cat" , "dog" , "duck",  "cow" ,"arthmya_1" , "arthmya_2" , "arthmya_3"  , "arthmya_4" , "range_1", "range_2", "range_3", "range_4", "range_5", "range_6"]
@@ -117,30 +115,79 @@ class MyWindow(QMainWindow):
             "range_9":[],      
             "range_10":[],      
             
-           
+            
             
 
 
-            "cat" :   [(500 , 605) , (1000 , 1200) , (2200 , 2400)  , (550 , 600) , (1700 , 1800) , (2750 , 3000) , (3300 , 3500) , (3900 , 4200) , (4500 , 4700 ) , (5100 , 5300)], #new sound not completly disapear but the cat sound is lowr
+            "cat" :   [(90 , 120) , (260 , 320) , (500 , 605) , (1000 , 1200) , (2200 , 2400)  , (550 , 600) , (1700 , 1800) , (2750 , 3000) , (3300 , 3500) , (3900 , 4200) , (4500 , 4700 ) , (5100 , 5300)], #new sound not completly disapear but the cat sound is lowr cat1
+            # "cat" :   [(540 , 680) , (1140 , 1300) , (1760 , 1940) ,(3740 , 3820) , (2350 , 2600) , (3100 , 3200) , (3550 , 3650)  , ], #new sound not completly disapear but the cat sound is lowr cat 100
             "dog" :  [(200 , 1133) , (1150 , 1900)], #new so bad 
-            "duck" :  [(400 , 550) , (800 , 840) ,( 880 , 920) , (960,  1000) , (1100 , 2200)], #duck2
-            "cow" :   [(200, 400) , (500 , 700) , (790 , 860) , (800 , 1020) , (1040 , 1280) , (1300 , 1400)], #new and done (just the sound is lowered)
+            "duck" :  [(0 , 400) , (600 , 650) , (750 , 850) , (950 , 1090) , (1280 , 1340)], #duck2
+            # "duck" :  [(400 , 550) , (800 , 840) ,( 880 , 920) , (960,  1000) , (1100 , 2200)], #duck2
+            # "cow" :   [(0 , 2) , (150 , 185) , (660 , 720 ) , (840 , 1100)  , (1180 , 1260) , (1580 , 1620)], #new and done (just the sound is lowered)
+            "cow" :   [(200, 400) , (500 , 700) , (790 , 860) , (800 , 1020) , (1040 , 1280) , (1300 , 1400)  , (1600 , 1640) , (1400, 1500) , (1560 , 1660)], #new and done (just the sound is lowered)
             
-            "bass" : [(0 , 600)] ,  # new and done
+            "bass" : [(0 , 250) , (260 , 300) , (320 , 360) , (370 , 430) , (440 , 480)] ,  # new and done
             "voil" : [(504 , 556 ) , (1014 , 1070) ,  (1530 , 1601) , (2048 , 2120) , (2566 , 2644) , (3080 , 3190) , (3600, 3710 ) , (4120 , 4220)], # new (done but replaced with noise)
             "piano" : [(260 , 264 ) , (520 , 532) ,  (780 , 790) ,  (1045 , 1052) , (1574 , 1584) , (1840 , 1850)], #done
-            "drum" : [(25 , 150) , (156 , 170  ) , (200 , 264) ,(264 , 300) , (360 , 440) , (485 , 520 ), (532 , 640) , (640 , 780)  , (900 , 950 ) , (1020 , 1045) , (1052 , 1140) , (1160 , 1220) , (1300 , 1350)  , (1420 , 1460) , (1540 , 1600) , (1680 , 1730) , (1830 , 1860) , (1960 , 2000) , (2090 , 2130) , (2220 , 2270) , (2370 , 2400) , (2780 , 2810) , (2920 , 2950) , (3060 , 3090) , (3190 , 3220) ], #new gitur
+            # "drum" : [(0 , 250)  ], #new gitur
+            "drum" : [(3120 , 3800) , (11500 , 12200)  , (8400 , 8800)  , (16200 , 16600) ], #new oxi   
+            # "drum" : [(25 , 150) , (156 , 170  ) , (200 , 264) ,(264 , 300) , (360 , 440) , (485 , 520 ), (532 , 640) , (640 , 780)  , (900 , 950 ) , (1020 , 1045) , (1052 , 1140) , (1160 , 1220) , (1300 , 1350)  , (1420 , 1460) , (1540 , 1600) , (1680 , 1730) , (1830 , 1860) , (1960 , 2000) , (2090 , 2130) , (2220 , 2270) , (2370 , 2400) , (2780 , 2810) , (2920 , 2950) , (3060 , 3090) , (3190 , 3220) ], #new gitur
 
             # # "arthmya_1" : [(81 , 100) , (58 , 75) , (160, 175)],
-            # # "arthmya_2" : [(110 , 120) , (140 , 150) ],
+            # # "arthmya_2" : [(110 , 120) , (140 , 150) ],xxxx
             # # "arthmya_3" : [(81 , 100)  ,(268 , 280 ) , (140 , 150) , (190 , 200)],
+          
+            # ____case 1_____ norma_signal
+            # "arthmya_1" : [(81 , 100) , (58 , 75) , (160, 175)], #arr_1
+            # "arthmya_2" : [(110 , 120) , (140 , 150) ], # arr_2
+            # "arthmya_3" : [(81 , 100)  ,(268 , 280 ) , (140 , 150) , (190 , 200)], # arr_2
+            # "arthmya_4" : [(20 , 35) , (40 ,60), (76 , 80) , (96 , 112) , (124 , 140) , (152 , 162) , (174 , 192) , (200 , 220) , (230 , 240) , (250 , 270)  , (280 , 290) , (308 , 317) , (335 , 345) ],     #normal
 
 
-            "arthmya_1" : [(2 , 3.9) , (5 , 5.9) ],
+            # ______
+            # ____case 2_____ bidmc_01_Signals.csv not perfect
+            # "arthmya_1" : [(2 , 2.9) , (5 , 5.9) ],
+            # "arthmya_2" : [(6.6 , 7.5) , (17.4 , 18) ],
+            # "arthmya_3" : [(9.5 , 10.5)  ,(12.8, 13.4) , (8 , 9)],
+            # "arthmya_4" : [(1.4 , 2) , (2.9 , 3.4) , (4.4, 5) , (5.9 , 6.6) , (7.5 , 8) , (9 , 9.5) , (10.5 , 11.2) , (12 , 12.8) , (13.4 , 14.4) , (15 , 16) , (16.6 , 17.4) , (18 ,19)], #same as 2
+
+            # ____case 3____ bidmc_02_Signals.csv
+            # "arthmya_1" : [(2 , 2.9) , (5 , 5.9) ],
+            # "arthmya_2" : [(6.6 , 7.5) , (17.4 , 18) ],
+            # "arthmya_3" : [(9.5 , 10.5)  ,(12.8, 13.4) , (8 , 9)],
+            # "arthmya_4" : [(1.4 , 2) , (2.9 , 3.4) , (4.4, 5) , (5.9 , 6.6) , (7.5 , 8) , (9 , 9.5) , (10.5 , 11.2) , (12 , 12.8) , (13.4 , 14.4) , (15 , 16) , (16.6 , 17.4) , (18 ,19)], #same as 1
+            
+            # ____case 4____ 
+            # "arthmya_1" : [(22 , 34) , (38 , 42) , (49 , 51) ],
+            # "arthmya_2" : [(25 , 31) , (9 , 20) ],
+            # "arthmya_3" : [(52 , 54) , (63 , 67) , (13, 17) , (33 , 40)],
+            # "arthmya_4" : [(1.2 , 1.3) , (2.6 , 2.9) , (4 , 4.2) , (5.3,  5.7) , (6.6 , 7.1) , (8 , 8.4) , (9.4 , 9.8) , (10.8 , 11.1), (12 , 12.4) ],
+            
+            # ____case 4____ 
+            # "arthmya_1" : [(300 , 320) , (305 , 310) , (401 , 430)],
+            # "arthmya_2" : [(160 , 163) , (153 , 159) , (197 , 202) , (207 , 220)],
+            # "arthmya_3" : [(401 , 420) ,(250 , 273) , (309 , 415)],
+            # "arthmya_4" : [(15 , 22) , (33 , 42) , (53 , 56) , (68 , 78) , (85 , 97) , (104 , 115) , (122 , 133), (140 , 152)],
+            # "arthmya_4" : [(15 , 22) , (33 , 42) , (53 , 56) , (68 , 78) , (85 , 97) , (104 , 115) , (122 , 133), (140 , 152) , (158 , 170) , (177 , 188) , (195 , 203)],
+            
+            
+            
+            # final_case
+            "arthmya_1" : [(81 , 100) , (58 , 75) , (160, 175)], #arr_1
             "arthmya_2" : [(6.6 , 7.5) , (17.4 , 18) ],
-            "arthmya_3" : [(9.5 , 10.5)  ,(12.8, 13.4) , (8 , 9)],
-            "arthmya_4" : [(1.4 , 2) , (2.9 , 3.4) , (4.4, 5) , (5.9 , 6.6) , (7.5 , 8) , (9 , 9.5) , (10.5 , 11.2) , (12 , 12.8) , (13.4 , 14.4) , (15 , 16) , (16.6 , 17.4) , (18 ,19)],
+            "arthmya_3" : [(52 , 54) , (63 , 67) , (13, 17) , (33 , 40)],
 
+            "arthmya_4" : [(1.4 , 2) , (2.9 , 3.4) , (4.4, 5) , (5.9 , 6.6) , (7.5 , 8) , (9 , 9.5) , (10.5 , 11.2) , (12 , 12.8) , (13.4 , 14.4) , (15 , 16) , (16.6 , 17.4) , (18 ,19)], #same as 2
+
+            # "arthmya_2" : [(6.6 , 7.5) , (17.4 , 18) ],
+            # "arthmya_3" : [(9.5 , 10.5)  ,(12.8, 13.4) , (8 , 9)],
+            # "arthmya_4" : [(1.4 , 2) , (2.9 , 3.4) , (4.4, 5) , (5.9 , 6.6) , (7.5 , 8) , (9 , 9.5) , (10.5 , 11.2) , (12 , 12.8) , (13.4 , 14.4) , (15 , 16) , (16.6 , 17.4) , (18 ,19)],
+            
+            # "arthmya_1" : [(2 , 3.9) , (5 , 5.9) ],
+            # "arthmya_2" : [(6.6 , 7.5) , (17.4 , 18) ],
+            # "arthmya_3" : [(9.5 , 10.5)  ,(12.8, 13.4) , (8 , 9)],
+            # "arthmya_4" : [(1.4 , 2) , (2.9 , 3.4) , (4.4, 5) , (5.9 , 6.6) , (7.5 , 8) , (9 , 9.5) , (10.5 , 11.2) , (12 , 12.8) , (13.4 , 14.4) , (15 , 16) , (16.6 , 17.4) , (18 ,19)],
 
 
             # '''outside'''
@@ -233,19 +280,31 @@ class MyWindow(QMainWindow):
 
 
     def open_normal(self):
-        file_path = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/normal_ecg.csv"
-        df = pd.read_csv(file_path)
-            # t = np.arange(0 , 7 , 1/125)
-        t = df.iloc[:, 0].values
-        self.original_sig = df.iloc[:, 1].values
-        self.ui.grph_input_sig.clear()
-        self.ui.grph_input_sig.plot(t , self.original_sig)
-        self.ui.grph_input_sig.getViewBox().autoRange()
+        # file_path = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/music/music/final_please.wav"
+        file_path = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/animal/cat_1_cow_dog_2_suck_2.wav"
+
+        # file_path = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/ECG_files/normal_ecg.csv"
+        # df = pd.read_csv(file_path)
+        # self.time = df.iloc[:, 0].values
+        # self.original_sig = df.iloc[:, 1].values
+        # self.sample_rate = 1/(self.time[1]-self.time[0])
+        # # self.spectogram(self.original_sig , 60 , self.spectrogram_canvas_input)
+        # self.plot_signal(self.time , self.original_sig , self.sample_rate , self.ui.grph_input_sig)
+        # self.reset_slider()
         
-        self.sample_rate = 1/(t[1]-t[0])
-        self.spectogram(self.original_sig , 60 , self.spectrogram_canvas_input)
+        # self.fourier_function()
+        # self.uniform_ranges()
+        
+        
+        
+        self.sample_rate, self.original_sig = wavfile.read(file_path)
+        self.time  = np.array(range(0 , len(self.original_sig) )) / self.sample_rate
+
+        self.plot_signal(self.time , self.original_sig , self.sample_rate , self.ui.grph_input_sig)
         self.reset_slider()
         
+        self.fourier_function()
+        self.uniform_ranges()
         # file_path  = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/music/violin-C5.wav"
         # file_path  = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/animal/cat_1_cow_dog_2_suck_2.wav"
         # file_path  = "C:/Users/Sara/Desktop/Sara_Signal_Equalizer/music/pc4_drykickone_vc5_bass10.wav"
@@ -317,16 +376,17 @@ class MyWindow(QMainWindow):
         file_path , _ = QFileDialog.getOpenFileName(self, "Open Song", "~")
         
         if file_path[-3:]== "csv":
-            self.is_sound = False
-            self.is_ecg = True
+            # self.is_sound = False
+            # self.is_ecg = True
             df = pd.read_csv(file_path)
             self.time = df.iloc[:, 0].values
             self.original_sig = df.iloc[:, 1].values
             self.sample_rate = 1/(self.time[1]-self.time[0])
+            # self.time = np.array(range(0 , len(self.original_sig) )) / self.sample_rate
             
         elif file_path[-3:]== "wav":
-            self.is_sound = True
-            self.is_ecg = False
+            # self.is_sound = True
+            # self.is_ecg = False
             self.sample_rate, self.original_sig = wavfile.read(file_path)
             self.time = np.array(range(0 , len(self.original_sig) )) / self.sample_rate
 
