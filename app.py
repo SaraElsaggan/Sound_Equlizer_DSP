@@ -103,7 +103,9 @@ class MyWindow(QMainWindow):
             "arthmya_3" : [(95 , 105)  , (140 , 155) ], 
 
         }
-      
+        for i in range(10):
+            self.freq_ranges[f"range_{i+1}"] = []
+   
    
         for name in self.freq_ranges:
             slider = getattr(self.ui, f"{name}_slider")
