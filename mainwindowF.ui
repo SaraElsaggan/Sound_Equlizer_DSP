@@ -594,147 +594,257 @@ QLabel{
 font-weight: bold;}</string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="uniform_page">
            <layout class="QGridLayout" name="gridLayout">
-            <item row="0" column="0">
-             <widget class="QSlider" name="range_1_slider">
-              <property name="font">
-               <font>
-                <bold>false</bold>
-               </font>
-              </property>
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QSlider" name="range_2_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QSlider" name="range_3_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="3">
-             <widget class="QSlider" name="range_4_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <widget class="QSlider" name="range_4_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_4_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
-            <item row="0" column="4">
-             <widget class="QSlider" name="range_5_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="5">
-             <widget class="QSlider" name="range_6_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="sliderPosition">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
+            <item row="0" column="0">
+             <layout class="QVBoxLayout" name="verticalLayout_6">
+              <item>
+               <widget class="QSlider" name="range_1_slider">
+                <property name="font">
+                 <font>
+                  <bold>false</bold>
+                 </font>
+                </property>
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_1_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item row="0" column="6">
-             <widget class="QSlider" name="range_7_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="7">
-             <widget class="QSlider" name="range_8_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
+             <layout class="QVBoxLayout" name="verticalLayout_12">
+              <item>
+               <widget class="QSlider" name="range_7_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_7_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item row="0" column="8">
-             <widget class="QSlider" name="range_9_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
+             <layout class="QVBoxLayout" name="verticalLayout_14">
+              <item>
+               <widget class="QSlider" name="range_9_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_9_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="5">
+             <layout class="QVBoxLayout" name="verticalLayout_11">
+              <item>
+               <widget class="QSlider" name="range_6_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="sliderPosition">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_6_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="1">
+             <layout class="QVBoxLayout" name="verticalLayout_7">
+              <item>
+               <widget class="QSlider" name="range_2_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_2_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="7">
+             <layout class="QVBoxLayout" name="verticalLayout_13">
+              <item>
+               <widget class="QSlider" name="range_8_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_8_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="4">
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <widget class="QSlider" name="range_5_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_5_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="0" column="2">
+             <layout class="QVBoxLayout" name="verticalLayout_8">
+              <item>
+               <widget class="QSlider" name="range_3_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_3_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
             <item row="0" column="9">
-             <widget class="QSlider" name="range_10_slider">
-              <property name="maximum">
-               <number>10</number>
-              </property>
-              <property name="value">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-             </widget>
+             <layout class="QVBoxLayout" name="verticalLayout_15">
+              <item>
+               <widget class="QSlider" name="range_10_slider">
+                <property name="maximum">
+                 <number>10</number>
+                </property>
+                <property name="value">
+                 <number>1</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="range_10_lbl">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -745,7 +855,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_26">
                 <item>
-                 <widget class="QSlider" name="bass_slider">
+                 <widget class="QSlider" name="triangle_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -760,7 +870,7 @@ font-weight: bold;}</string>
                 <item>
                  <widget class="QLabel" name="label_35">
                   <property name="text">
-                   <string>bass</string>
+                   <string>triangle</string>
                   </property>
                  </widget>
                 </item>
@@ -817,7 +927,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_29">
                 <item>
-                 <widget class="QSlider" name="drum_slider">
+                 <widget class="QSlider" name="xylophone_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -849,7 +959,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_30">
                 <item>
-                 <widget class="QSlider" name="cat_slider">
+                 <widget class="QSlider" name="horse_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -864,7 +974,7 @@ font-weight: bold;}</string>
                 <item>
                  <widget class="QLabel" name="label_39">
                   <property name="text">
-                   <string>cat</string>
+                   <string>horse</string>
                   </property>
                  </widget>
                 </item>
@@ -873,7 +983,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_31">
                 <item>
-                 <widget class="QSlider" name="dog_slider">
+                 <widget class="QSlider" name="bat_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -888,7 +998,7 @@ font-weight: bold;}</string>
                 <item>
                  <widget class="QLabel" name="label_40">
                   <property name="text">
-                   <string>dog</string>
+                   <string>bat</string>
                   </property>
                  </widget>
                 </item>
@@ -897,7 +1007,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_32">
                 <item>
-                 <widget class="QSlider" name="duck_slider">
+                 <widget class="QSlider" name="wolf_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -912,7 +1022,7 @@ font-weight: bold;}</string>
                 <item>
                  <widget class="QLabel" name="label_45">
                   <property name="text">
-                   <string>duck</string>
+                   <string>wolf</string>
                   </property>
                  </widget>
                 </item>
@@ -921,7 +1031,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_33">
                 <item>
-                 <widget class="QSlider" name="cow_slider">
+                 <widget class="QSlider" name="duck_slider">
                   <property name="maximum">
                    <number>10</number>
                   </property>
@@ -936,7 +1046,7 @@ font-weight: bold;}</string>
                 <item>
                  <widget class="QLabel" name="label_46">
                   <property name="text">
-                   <string>cow</string>
+                   <string>duck</string>
                   </property>
                  </widget>
                 </item>
@@ -1022,30 +1132,6 @@ font-weight: bold;}</string>
                 </item>
                </layout>
               </item>
-              <item>
-               <layout class="QVBoxLayout" name="verticalLayout_38">
-                <item>
-                 <widget class="QSlider" name="arthmya_4_slider">
-                  <property name="maximum">
-                   <number>10</number>
-                  </property>
-                  <property name="value">
-                   <number>1</number>
-                  </property>
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QLabel" name="label_50">
-                  <property name="text">
-                   <string>normal</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
-              </item>
              </layout>
             </item>
            </layout>
@@ -1103,6 +1189,52 @@ font-weight: bold;}</string>
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>combo_bx_mode</tabstop>
+  <tabstop>range_1_slider</tabstop>
+  <tabstop>range_2_slider</tabstop>
+  <tabstop>range_3_slider</tabstop>
+  <tabstop>range_4_slider</tabstop>
+  <tabstop>range_5_slider</tabstop>
+  <tabstop>range_6_slider</tabstop>
+  <tabstop>range_7_slider</tabstop>
+  <tabstop>range_8_slider</tabstop>
+  <tabstop>range_9_slider</tabstop>
+  <tabstop>range_10_slider</tabstop>
+  <tabstop>triangle_slider</tabstop>
+  <tabstop>voil_slider</tabstop>
+  <tabstop>piano_slider</tabstop>
+  <tabstop>xylophone_slider</tabstop>
+  <tabstop>horse_slider</tabstop>
+  <tabstop>bat_slider</tabstop>
+  <tabstop>wolf_slider</tabstop>
+  <tabstop>duck_slider</tabstop>
+  <tabstop>arthmya_1_slider</tabstop>
+  <tabstop>arthmya_2_slider</tabstop>
+  <tabstop>arthmya_3_slider</tabstop>
+  <tabstop>graphicsView_gaussian</tabstop>
+  <tabstop>std_input</tabstop>
+  <tabstop>chek_bx_show_spect_input</tabstop>
+  <tabstop>chek_bx_show_spect_output</tabstop>
+  <tabstop>btn_play_input</tabstop>
+  <tabstop>btn_pause_input</tabstop>
+  <tabstop>btn_zoom_in_input</tabstop>
+  <tabstop>btn_fast_input</tabstop>
+  <tabstop>btn_slow_input</tabstop>
+  <tabstop>signal_view</tabstop>
+  <tabstop>windows_tabs</tabstop>
+  <tabstop>graphicsView_hamming</tabstop>
+  <tabstop>graphicsView_rectangle</tabstop>
+  <tabstop>input_slider</tabstop>
+  <tabstop>grph_output_sig</tabstop>
+  <tabstop>btn_zoom_out_input</tabstop>
+  <tabstop>graphicsView_hanning</tabstop>
+  <tabstop>output_slider</tabstop>
+  <tabstop>btn_srt_begin_input</tabstop>
+  <tabstop>btn_play_output</tabstop>
+  <tabstop>btn_pause_output</tabstop>
+  <tabstop>grph_input_sig</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
