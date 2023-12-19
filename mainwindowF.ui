@@ -594,7 +594,7 @@ QLabel{
 font-weight: bold;}</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="uniform_page">
            <layout class="QGridLayout" name="gridLayout">
@@ -602,11 +602,14 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_9">
               <item>
                <widget class="QSlider" name="range_4_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -631,11 +634,14 @@ font-weight: bold;}</string>
                   <bold>false</bold>
                  </font>
                 </property>
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -655,11 +661,14 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_12">
               <item>
                <widget class="QSlider" name="range_7_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -679,11 +688,14 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_14">
               <item>
                <widget class="QSlider" name="range_9_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -703,14 +715,17 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_11">
               <item>
                <widget class="QSlider" name="range_6_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="sliderPosition">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -730,11 +745,14 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_7">
               <item>
                <widget class="QSlider" name="range_2_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -754,11 +772,14 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_13">
               <item>
                <widget class="QSlider" name="range_8_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -778,11 +799,14 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_10">
               <item>
                <widget class="QSlider" name="range_5_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -802,11 +826,14 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_8">
               <item>
                <widget class="QSlider" name="range_3_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -826,11 +853,14 @@ font-weight: bold;}</string>
              <layout class="QVBoxLayout" name="verticalLayout_15">
               <item>
                <widget class="QSlider" name="range_10_slider">
+                <property name="minimum">
+                 <number>-50</number>
+                </property>
                 <property name="maximum">
-                 <number>10</number>
+                 <number>50</number>
                 </property>
                 <property name="value">
-                 <number>1</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -856,8 +886,11 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_26">
                 <item>
                  <widget class="QSlider" name="triangle_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
                    <number>1</number>
@@ -880,11 +913,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_27">
                 <item>
                  <widget class="QSlider" name="voil_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -904,11 +940,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_28">
                 <item>
                  <widget class="QSlider" name="piano_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -928,11 +967,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_29">
                 <item>
                  <widget class="QSlider" name="xylophone_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -960,11 +1002,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_30">
                 <item>
                  <widget class="QSlider" name="horse_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -984,11 +1029,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_31">
                 <item>
                  <widget class="QSlider" name="bat_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1008,11 +1056,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_32">
                 <item>
                  <widget class="QSlider" name="wolf_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1032,11 +1083,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_33">
                 <item>
                  <widget class="QSlider" name="duck_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1064,11 +1118,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_35">
                 <item>
                  <widget class="QSlider" name="arthmya_1_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1088,11 +1145,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_36">
                 <item>
                  <widget class="QSlider" name="arthmya_2_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1112,11 +1172,14 @@ font-weight: bold;}</string>
                <layout class="QVBoxLayout" name="verticalLayout_37">
                 <item>
                  <widget class="QSlider" name="arthmya_3_slider">
+                  <property name="minimum">
+                   <number>-50</number>
+                  </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1139,19 +1202,6 @@ font-weight: bold;}</string>
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </item>
