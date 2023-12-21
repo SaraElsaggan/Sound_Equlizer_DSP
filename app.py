@@ -39,7 +39,7 @@ class MyWindow(QMainWindow):
         self.ui.setupUi(self)  
 
         # Set the checkbox to be checked by default
-        self.ui.std_input.setText("5000")
+        # self.ui.std_input.setText("5000")
         self.ui.chek_bx_show_spect_input.setChecked(True)
         self.ui.chek_bx_show_spect_output.setChecked(True)
         # Set the default page to index 0
@@ -84,6 +84,8 @@ class MyWindow(QMainWindow):
         self.ui.btn_slow_input.clicked.connect(lambda: self.playpack_speed(-.25))
         
         self.ui.windows_tabs.currentChanged.connect(lambda :self.window_function(5000 , self.ui.windows_tabs.currentIndex()))
+        self.ui.std_slider.valueChanged.connect(lambda :self.window_function(5000 , self.ui.windows_tabs.currentIndex()))
+        self.ui.std_slider.valueChanged.connect(lambda value: self.ui.std_lbl.setText(str(value)))
         self.ui.btn_srt_begin_input.clicked.connect(lambda :self.play_audio(self.original_sig , 1 , self.ui.input_slider , self.timer_1 , self.timer_2))
         
        
@@ -92,13 +94,16 @@ class MyWindow(QMainWindow):
             "horse" :   [(1300, 3300)], 
             "bat" :  [(3300, 6000)], 
             # "wolf" :  [(170, 1290)] ,
-            # "duck" :   [(3000 , 7000)],
-            "duck" :   [(2000, 7500) , (16000, 20000)],
+            # "duck" :   [(6000  , 20000)],
+            "duck" :   [(140  , 190) , (220 , 360) , (500 , 720) , (800 , 1080)],# cow 
+            # "duck" :   [(2000, 7500) , (16000, 20000)],
 
+            "xylophone" : [(300, 1000) ],    
             "triangle" : [(4200, 22000)] ,
+            # "xylophone" : [(0, 300) ],     
+            # "triangle" : [(1000, 22000)] ,
             "voil" : [(504 , 556 ) , (1014 , 1070) ,  (1530 , 1601) , (2048 , 2120) , (2566 , 2644) , (3080 , 3190) , (3600, 3710 ) , (4120 , 4220)], # new (done but replaced with noise)
             "piano" : [(0 ,10) , (60 , 80) , (100 , 200) , (240 , 280 ) , (260 , 264 ) , (480 , 580), (520 , 532) ,  (780 , 790) ,  (1045 , 1052) , (1574 , 1584) , (1840 , 1850) , (2000 , 2200) , (2350 , 2450) , (2640 , 2680) , (2900 , 2950 ), (3180,3260) ], #done
-            "xylophone" : [(300, 1000) ],    
           
             "arthmya_1" : [( 0,12 )], 
             "arthmya_2" : [(405 , 589)], 
@@ -230,7 +235,7 @@ class MyWindow(QMainWindow):
             window = np.hanning(length)
         elif window_type == 3:
             # window = gaussian(length , std = int(self.ui.std_input.text()))
-            window = gaussian(length , std = int(self.ui.std_input.text()))
+            window = gaussian(length , std = self.ui.std_slider.value())
 
         
         page_widget = self.ui.windows_tabs.widget(window_type)
@@ -257,6 +262,12 @@ class MyWindow(QMainWindow):
 
         all_indices = np.sort(all_indices)
         window = self.window_function( len(self.magnitude[all_indices])  , self.ui.windows_tabs.currentIndex() ) 
+
+        # outside_indices = np.setdiff1d(np.arange(len(self.frequency)), all_indices)
+
+        # # Modify the magnitude for elements outside all_indices
+        # self.magnitude_to_bodfy[outside_indices] = self.magnitude[outside_indices] * 0
+
         # self.ui.xylophone_slider.setMinimum(-50)
         # self.ui.xylophone_slider.setMaximum(50)
         # # min_db = -50

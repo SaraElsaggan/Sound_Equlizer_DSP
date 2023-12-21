@@ -489,19 +489,29 @@ QTabWidget::pane {
             <item>
              <widget class="PlotWidget" name="graphicsView_gaussian"/>
             </item>
+           </layout>
+          </item>
+          <item row="1" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <layout class="QHBoxLayout" name="horizontalLayout">
-              <item>
-               <widget class="QLabel" name="label_2">
-                <property name="text">
-                 <string>enter std</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLineEdit" name="std_input"/>
-              </item>
-             </layout>
+             <widget class="QLabel" name="std_lbl">
+              <property name="text">
+               <string>1000</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="std_slider">
+              <property name="maximum">
+               <number>2000</number>
+              </property>
+              <property name="value">
+               <number>1000</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -594,7 +604,7 @@ QLabel{
 font-weight: bold;}</string>
           </property>
           <property name="currentIndex">
-           <number>3</number>
+           <number>0</number>
           </property>
           <widget class="QWidget" name="uniform_page">
            <layout class="QGridLayout" name="gridLayout">
@@ -618,6 +628,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_4_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -650,6 +663,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_1_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -677,6 +693,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_7_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -704,6 +723,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_9_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -734,6 +756,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_6_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -761,6 +786,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_2_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -788,6 +816,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_8_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -815,6 +846,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_5_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -842,6 +876,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_3_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -869,6 +906,9 @@ font-weight: bold;}</string>
               </item>
               <item>
                <widget class="QLabel" name="range_10_lbl">
+                <property name="styleSheet">
+                 <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                </property>
                 <property name="text">
                  <string/>
                 </property>
@@ -902,6 +942,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_35">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>triangle</string>
                   </property>
@@ -929,6 +972,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_36">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>voil</string>
                   </property>
@@ -956,6 +1002,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_37">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>piano</string>
                   </property>
@@ -983,6 +1032,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_38">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>Xylophon</string>
                   </property>
@@ -1018,6 +1070,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_39">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>horse</string>
                   </property>
@@ -1045,6 +1100,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_40">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>bat</string>
                   </property>
@@ -1072,6 +1130,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_45">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>wolf</string>
                   </property>
@@ -1099,6 +1160,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_46">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>duck</string>
                   </property>
@@ -1134,6 +1198,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_41">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>arthmya 1</string>
                   </property>
@@ -1161,6 +1228,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_42">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>arthmya 2</string>
                   </property>
@@ -1176,10 +1246,10 @@ font-weight: bold;}</string>
                    <number>-50</number>
                   </property>
                   <property name="maximum">
-                   <number>50</number>
+                   <number>10</number>
                   </property>
                   <property name="value">
-                   <number>0</number>
+                   <number>1</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1188,6 +1258,9 @@ font-weight: bold;}</string>
                 </item>
                 <item>
                  <widget class="QLabel" name="label_49">
+                  <property name="styleSheet">
+                   <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>arthmya 3</string>
                   </property>
@@ -1263,7 +1336,6 @@ font-weight: bold;}</string>
   <tabstop>arthmya_2_slider</tabstop>
   <tabstop>arthmya_3_slider</tabstop>
   <tabstop>graphicsView_gaussian</tabstop>
-  <tabstop>std_input</tabstop>
   <tabstop>chek_bx_show_spect_input</tabstop>
   <tabstop>chek_bx_show_spect_output</tabstop>
   <tabstop>btn_play_input</tabstop>
