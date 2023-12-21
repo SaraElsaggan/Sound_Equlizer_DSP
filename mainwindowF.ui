@@ -537,9 +537,14 @@ QTabWidget::pane {
             </property>
             <property name="font">
              <font>
-              <pointsize>-1</pointsize>
+              <family>Segoe UI</family>
+              <pointsize>10</pointsize>
+              <italic>false</italic>
               <bold>true</bold>
              </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
             </property>
             <property name="text">
              <string>Select mode</string>
@@ -604,7 +609,7 @@ QLabel{
 font-weight: bold;}</string>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>3</number>
           </property>
           <widget class="QWidget" name="uniform_page">
            <layout class="QGridLayout" name="gridLayout">
@@ -1113,7 +1118,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_32">
                 <item>
-                 <widget class="QSlider" name="wolf_slider">
+                 <widget class="QSlider" name="dog_slider">
                   <property name="minimum">
                    <number>-50</number>
                   </property>
@@ -1134,7 +1139,7 @@ font-weight: bold;}</string>
                    <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
                   </property>
                   <property name="text">
-                   <string>wolf</string>
+                   <string>dog</string>
                   </property>
                  </widget>
                 </item>
@@ -1143,7 +1148,7 @@ font-weight: bold;}</string>
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_33">
                 <item>
-                 <widget class="QSlider" name="duck_slider">
+                 <widget class="QSlider" name="cow_slider">
                   <property name="minimum">
                    <number>-50</number>
                   </property>
@@ -1164,7 +1169,7 @@ font-weight: bold;}</string>
                    <string notr="true">font: 700 10pt &quot;Segoe UI&quot;;</string>
                   </property>
                   <property name="text">
-                   <string>duck</string>
+                   <string>cow</string>
                   </property>
                  </widget>
                 </item>
@@ -1246,10 +1251,10 @@ font-weight: bold;}</string>
                    <number>-50</number>
                   </property>
                   <property name="maximum">
-                   <number>10</number>
+                   <number>50</number>
                   </property>
                   <property name="value">
-                   <number>1</number>
+                   <number>0</number>
                   </property>
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -1330,8 +1335,8 @@ font-weight: bold;}</string>
   <tabstop>xylophone_slider</tabstop>
   <tabstop>horse_slider</tabstop>
   <tabstop>bat_slider</tabstop>
-  <tabstop>wolf_slider</tabstop>
-  <tabstop>duck_slider</tabstop>
+  <tabstop>dog_slider</tabstop>
+  <tabstop>cow_slider</tabstop>
   <tabstop>arthmya_1_slider</tabstop>
   <tabstop>arthmya_2_slider</tabstop>
   <tabstop>arthmya_3_slider</tabstop>
