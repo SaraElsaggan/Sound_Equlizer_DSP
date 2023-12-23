@@ -194,12 +194,12 @@ class MyWindow(QMainWindow):
             self.time = np.array(range(0 , len(self.original_sig) )) / self.sample_rate
 
         self.plot_signal(self.time , self.original_sig , self.sample_rate , self.ui.grph_input_sig)
-        self.reset_slider()
         self.ui.grph_output_sig.clear()
         
         
         self.fourier_function()
         self.uniform_ranges()
+        self.reset_slider()
         
     def plot_signal(self ,time ,  samples , sampling_rate , widget):
     
@@ -285,7 +285,8 @@ class MyWindow(QMainWindow):
         
         self.plot_specrtum(self.frequency , self.magnitude_to_bodfy)
         complex_signal = self.magnitude_to_bodfy * np.exp(1j * self.phase)
-        self.modified_signal = np. fft.irfft(complex_signal)
+        self.modified_signal = np. fft.irfft(complex_signal) 
+        # self.modified_signal = np. fft.irfft(complex_signal) * max(self.original_sig)
         self.plot_signal(self.time ,self.modified_signal , self.sample_rate , self.ui.grph_output_sig )
         self.spectogram(self.modified_signal , self.sample_rate , self.spectrogram_canvas_output)  
         
