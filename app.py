@@ -38,17 +38,13 @@ class MyWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)  
 
-        # Set the checkbox to be checked by default
-        # self.ui.std_input.setText("5000")
         self.ui.chek_bx_show_spect_input.setChecked(True)
         self.ui.chek_bx_show_spect_output.setChecked(True)
-        # Set the default page to index 0
         self.ui.stackedWidget.setCurrentIndex(0)
        
         self.ui.stackedWidget.setFrameShape(QFrame.NoFrame)
         self.ui.stackedWidget.setFrameShadow(QFrame.Plain)
         self.ui.combo_bx_mode.currentIndexChanged.connect(self.handleComboBox)
-        # add canvas to plot spectogram
         self.spectrogram_canvas_input = MplCanvas(self)
         self.spectrogram_canvas_output = MplCanvas(self)
         self.ui.specto_layout_input.addWidget(self.spectrogram_canvas_input)
@@ -93,15 +89,10 @@ class MyWindow(QMainWindow):
             "dog" :  [(187.5, 1300)] ,
             "horse" :   [(1300, 3300)], 
             "bat" :  [(3300, 6000)], 
-            # "wolf" :  [(170, 1290)] ,
-            # "duck" :   [(6000  , 20000)],
             "cow" :   [(140  , 190) , (220 , 360) , (500 , 720) , (800 , 1080)],# cow 
-            # "duck" :   [(2000, 7500) , (16000, 20000)],
 
             "xylophone" : [(300, 1000) ],    
             "triangle" : [(4200, 22000)] ,
-            # "xylophone" : [(0, 300) ],     
-            # "triangle" : [(1000, 22000)] ,
             "voil" : [(504 , 556 ) , (1014 , 1070) ,  (1530 , 1601) , (2048 , 2120) , (2566 , 2644) , (3080 , 3190) , (3600, 3710 ) , (4120 , 4220)], # new (done but replaced with noise)
             "piano" : [(0 ,10) , (60 , 80) , (100 , 200) , (240 , 280 ) , (260 , 264 ) , (480 , 580), (520 , 532) ,  (780 , 790) ,  (1045 , 1052) , (1574 , 1584) , (1840 , 1850) , (2000 , 2200) , (2350 , 2450) , (2640 , 2680) , (2900 , 2950 ), (3180,3260) ], #done
           
@@ -109,7 +100,6 @@ class MyWindow(QMainWindow):
             "arthmya_2" : [(405 , 589)], 
             
             "arthmya_3" : [(40 , 70) ], 
-            # "arthmya_3" : [(95 , 105)  , (140 , 155) ], 
 
         }
         for i in range(10):
@@ -119,12 +109,9 @@ class MyWindow(QMainWindow):
         for name in self.freq_ranges:
             slider = getattr(self.ui, f"{name}_slider")
             slider.valueChanged.connect(lambda value, n=name: self.modfy_frq_component(self.freq_ranges[n], value))
-      
-            # slider.valueChanged.connect(lambda value : self.update_tooltip(slider , value))
             slider.valueChanged.connect(lambda value, s=slider: self.update_tooltip(s, value))
 
             
-            # slider.setToolTip(f"{slider.value()}")
 
     
 
@@ -134,29 +121,9 @@ class MyWindow(QMainWindow):
         QShortcut(QKeySequence("Ctrl+n"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(2))
         QShortcut(QKeySequence("Ctrl+u"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(0))
 
-        QShortcut(QKeySequence("Ctrl+z"), self).activated.connect(self.save_sound_file)
-        QShortcut(QKeySequence("Ctrl+s"), self).activated.connect(self.save_ecg_file)
 
-    def save_sound_file(self):
-        modified_file_path, _ = QFileDialog.getSaveFileName(self, "Save Modified Signal", "~", "WAV Files (*.wav);;All Files (*)")
-        # output_file_path = "path/to/your/output/file.wav"
-        if modified_file_path:
-            wavfile.write(modified_file_path, self.sample_rate, self.modified_signal)
-        
-    def save_ecg_file(self):
-        # modified_df = pd.DataFrame({np.arange(0, len(self.modified_signal)) / self.sample_rate, self.modified_signal})
-        # modified_df = pd.DataFrame({np.arange(0, len(self.modified_signal)) / self.sample_rate, self.modified_signal})
-        # modified_df = pd.DataFrame([np.arange(0, len(self.modified_signal)) / self.sample_rate, self.modified_signal])
-# 
-
-        modified_df = pd.DataFrame({'Time': np.arange(0, len(self.modified_signal)) / self.sample_rate,'Modified_Signal': self.modified_signal})
-        
-        modified_file_path, _ = QFileDialog.getSaveFileName(self, "Save Modified Signal", "~", "CSV Files (*.csv)")
-        if modified_file_path:
-                modified_df.to_csv(modified_file_path, index=False)
     
     def update_tooltip(self , slider , slider_value):
-        # Set the tooltip to be the current value of the slider
         slider.setToolTip(f"{str(slider_value)} db")
         
     def handleComboBox(self, index):
@@ -234,7 +201,6 @@ class MyWindow(QMainWindow):
         elif window_type == 2:
             window = np.hanning(length)
         elif window_type == 3:
-            # window = gaussian(length , std = int(self.ui.std_input.text()))
             window = gaussian(length , std = self.ui.std_slider.value())
 
         
@@ -262,31 +228,10 @@ class MyWindow(QMainWindow):
 
         all_indices = np.sort(all_indices)
         window = self.window_function( len(self.magnitude[all_indices])  , self.ui.windows_tabs.currentIndex() ) 
-
-        # outside_indices = np.setdiff1d(np.arange(len(self.frequency)), all_indices)
-
-        # # Modify the magnitude for elements outside all_indices
-        # self.magnitude_to_bodfy[outside_indices] = self.magnitude[outside_indices] * 0
-
-        # self.ui.xylophone_slider.setMinimum(-50)
-        # self.ui.xylophone_slider.setMaximum(50)
-        # # min_db = -50
-        # max_db = 50
-        # max_linear_value = 100
-
-        # db_value = min_db + (slider_gain / max_linear_value) * (max_db - min_db)
         self.magnitude_to_bodfy[all_indices] = self.magnitude[all_indices] * (10 ** (slider_gain / 20))*window
-        # print(f"slider_value :{self.ui.xylophone_slider.value()}")
-        # x = 10 ** (slider_gain / 20)
-        # print(f"db_value :{x}")
-        # self.magnitude_to_bodfy[all_indices] = self.magnitude[all_indices] * slider_gain *window
-
-        
-        
         self.plot_specrtum(self.frequency , self.magnitude_to_bodfy)
         complex_signal = self.magnitude_to_bodfy * np.exp(1j * self.phase)
         self.modified_signal = np. fft.irfft(complex_signal) 
-        # self.modified_signal = np. fft.irfft(complex_signal) * max(self.original_sig)
         self.plot_signal(self.time ,self.modified_signal , self.sample_rate , self.ui.grph_output_sig )
         self.spectogram(self.modified_signal , self.sample_rate , self.spectrogram_canvas_output)  
         
@@ -332,7 +277,7 @@ class MyWindow(QMainWindow):
         slider.setValue(0)
         timer_2.stop()
         sd.play(signal *k , self.sample_rate)
-        slider.setMaximum(int(self.length*1000))  # Assuming 5 seconds, as the range is in milliseconds
+        slider.setMaximum(int(self.length*1000))  
         timer.start(100)
         
     def spectogram(self  ,signal , sample_rate ,widget):
