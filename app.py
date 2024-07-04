@@ -44,29 +44,29 @@ class MyWindow(QMainWindow):
        
         self.ui.stackedWidget.setFrameShape(QFrame.NoFrame)
         self.ui.stackedWidget.setFrameShadow(QFrame.Plain)
-        self.ui.combo_bx_mode.currentIndexChanged.connect(self.handleComboBox)
         self.spectrogram_canvas_input = MplCanvas(self)
         self.spectrogram_canvas_output = MplCanvas(self)
         self.ui.specto_layout_input.addWidget(self.spectrogram_canvas_input)
         self.ui.specto_layout_output.addWidget(self.spectrogram_canvas_output)
         
         self.timer_1 = QTimer(self)
-        self.timer_1.timeout.connect(lambda :self.update_slider( self.ui.input_slider))
         self.ui.input_slider.setMinimum(0)
         self.ui.input_slider.setValue(0)
         
         self.timer_2 = QTimer(self)
-        self.timer_2.timeout.connect(lambda :self.update_slider( self.ui.output_slider))
         self.ui.output_slider.setMinimum(0)
         self.ui.output_slider.setValue(0)
-        
+
         self.uin_sliders = []
+        # here all the connections of buttions and actions
+        self.timer_2.timeout.connect(lambda :self.update_slider( self.ui.output_slider))
+        self.timer_1.timeout.connect(lambda :self.update_slider( self.ui.input_slider))
+        self.ui.combo_bx_mode.currentIndexChanged.connect(self.handleComboBox)
         self.ui.chek_bx_show_spect_input.stateChanged.connect(lambda : self.show_hide_specto_grph( self.ui.chek_bx_show_spect_input.isChecked(), self.spectrogram_canvas_input))
         self.ui.chek_bx_show_spect_output.stateChanged.connect(lambda : self.show_hide_specto_grph( self.ui.chek_bx_show_spect_output.isChecked(), self.spectrogram_canvas_output))
 
         self.ui.btn_zoom_in_input.clicked.connect(lambda: self.zoom( 1 / 1.2))
         self.ui.btn_zoom_out_input.clicked.connect(lambda: self.zoom(  1.2))
-
 
         self.ui.actionUpload_file.triggered.connect(self.upload_signal_file)
         
@@ -84,7 +84,7 @@ class MyWindow(QMainWindow):
         self.ui.std_slider.valueChanged.connect(lambda value: self.ui.std_lbl.setText(str(value)))
         self.ui.btn_srt_begin_input.clicked.connect(lambda :self.play_audio(self.original_sig , 1 , self.ui.input_slider , self.timer_1 , self.timer_2))
         
-       
+        # all freqencies ranges for sounds and ECG signals
         self.freq_ranges = {
             "dog" :  [(187.5, 1300)] ,
             "horse" :   [(1300, 3300)], 
@@ -98,10 +98,10 @@ class MyWindow(QMainWindow):
           
             "arthmya_1" : [( 0,12 )], 
             "arthmya_2" : [(405 , 589)], 
-            
             "arthmya_3" : [(40 , 70) ], 
 
         }
+        
         for i in range(10):
             self.freq_ranges[f"range_{i+1}"] = []
    
@@ -114,12 +114,13 @@ class MyWindow(QMainWindow):
             
 
     
-
+        # some shortcuts
         QShortcut(QKeySequence("Ctrl+o"), self).activated.connect(self.upload_signal_file)
         QShortcut(QKeySequence("Ctrl+m"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(1))
         QShortcut(QKeySequence("Ctrl+b"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(3))
         QShortcut(QKeySequence("Ctrl+n"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(2))
         QShortcut(QKeySequence("Ctrl+u"), self).activated.connect(lambda :self.ui.combo_bx_mode.setCurrentIndex(0))
+        QShortcut(QKeySequence("Ctrl+s"), self).activated.connect(self.save_ecg_file)
 
 
     
@@ -177,6 +178,7 @@ class MyWindow(QMainWindow):
         widget.plot(time, samples)
         widget.getViewBox().autoRange()
         self.spectogram(self.original_sig , self.sample_rate , self.spectrogram_canvas_input)
+        
   
     def fourier_function(self):
         complex_fft = np.fft.rfft(self.original_sig)
@@ -302,6 +304,15 @@ class MyWindow(QMainWindow):
         if current_value < slider.maximum():
             slider.setValue(current_value + 100)  
    
+    def save_ecg_file(self):
+        
+        # this fucntion is to created you own arrthmia ECG with you coustmized frequecy range from a normal ECG
+        modified_df = pd.DataFrame({'Time': np.arange(0, len(self.modified_signal)) / self.sample_rate,'Modified_Signal': self.modified_signal})
+        
+        modified_file_path, _ = QFileDialog.getSaveFileName(self, "Save Modified Signal", "~", "CSV Files (*.csv)")
+        if modified_file_path:
+                modified_df.to_csv(modified_file_path, index=False)
+    
       
 
 def main():
