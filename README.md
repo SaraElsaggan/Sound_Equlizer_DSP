@@ -38,3 +38,5 @@ Additionally, the application provides options for applying different multiplica
 - **Sliders**: Sliders allow users to adjust the magnitude of frequency components.
 - **Cine Signal Viewers**: Two linked cine signal viewers display the input and output signals synchronously, with full functionality for play, stop, pause, speed control, zoom, pan, and reset.
 - **Spectrograms**: Two spectrograms visualize the input and output signals, updating in real-time as adjustments are made. Users can toggle the visibility of spectrograms as needed.
+  
+

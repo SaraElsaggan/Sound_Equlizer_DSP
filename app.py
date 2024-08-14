@@ -306,7 +306,8 @@ class MyWindow(QMainWindow):
    
     def save_ecg_file(self):
         
-        # this fucntion is to created you own arrthmia ECG with you coustmized frequecy range from a normal ECG
+        # this fucntion is to created you own arrthmia ECG with you coustmized frequecy range from a normal ECG 
+        # open a normanl ECG signal then change the slider to manipulate a specific range of a frequency to create an arthmia then press ctrl+s  (;
         modified_df = pd.DataFrame({'Time': np.arange(0, len(self.modified_signal)) / self.sample_rate,'Modified_Signal': self.modified_signal})
         
         modified_file_path, _ = QFileDialog.getSaveFileName(self, "Save Modified Signal", "~", "CSV Files (*.csv)")
